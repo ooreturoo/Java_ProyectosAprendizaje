@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet href="file.xsl" type="text/xsl"?>
+<main>
+    <persona>
+        <nombre>Pepe</nombre>
+        <dni>78983829</dni>
+        <telefono>654645342</telefono>
+        <fechaNacimiento>1994-02-14</fechaNacimiento>
+    </persona>
+    <persona>
+        <nombre>Juan</nombre>
+        <dni>78398439</dni>
+        <telefono>654444342</telefono>
+        <fechaNacimiento>1992-05-24</fechaNacimiento>
+    </persona>
+    <persona>
+        <nombre>Alberto</nombre>
+        <dni>78982214</dni>
+        <telefono>600940954</telefono>
+        <fechaNacimiento>1988-07-23</fechaNacimiento>
+    </persona>
+    <persona>
+        <nombre>Rodolfo</nombre>
+        <dni>78983811</dni>
+        <telefono>655234642</telefono>
+        <fechaNacimiento>2000-12-11</fechaNacimiento>
+    </persona>
+    <persona>
+        <nombre>Manuel</nombre>
+        <dni>78989809</dni>
+        <telefono>654644332</telefono>
+        <fechaNacimiento>1976-01-05</fechaNacimiento>
+    </persona>
+</main>

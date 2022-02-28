@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<clientes>
+	<usuario id="0">
+		<nombre>Pepe</nombre>
+		<apellido>Gonzalez</apellido>
+		<sexo>M</sexo>
+		<fechaNacimiento>1989-04-23</fechaNacimiento>
+	</usuario>
+	<usuario id="1">
+		<nombre>Manuel</nombre>
+		<apellido>Perez</apellido>
+		<sexo>M</sexo>
+		<fechaNacimiento>1969-06-02</fechaNacimiento>
+	</usuario>
+	<usuario id="2">
+		<nombre>Pepa</nombre>
+		<apellido>Ruiz</apellido>
+		<sexo>F</sexo>
+		<fechaNacimiento>1999-09-29</fechaNacimiento>
+	</usuario>
+	<usuario id="3">
+		<nombre>Juan</nombre>
+		<apellido>Trujillo</apellido>
+		<sexo>M</sexo>
+		<fechaNacimiento>2000-05-13</fechaNacimiento>
+	</usuario>
+	<usuario id="4">
+		<nombre>Lorena</nombre>
+		<apellido>Jimenez</apellido>
+		<sexo>F</sexo>
+		<fechaNacimiento>1993-01-23</fechaNacimiento>
+	</usuario>
+</clientes>
