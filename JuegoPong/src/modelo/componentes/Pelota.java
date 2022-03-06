@@ -1,71 +1,38 @@
 package modelo.componentes;
 
-import javafx.scene.canvas.Canvas;
 import javafx.scene.shape.Circle;
-import modelo.juego.Juego;
 
 public class Pelota {
 
-	private static final int VELOCIDAD_INICIAL = 5;
+	private static final int VELOCIDAD_INICIAL = 3;
+	private final double POSISION_INICIAL_X;
+	private final double POSISION_INICIAL_Y;
 	private final Circle CIRCULO;
-	private final Canvas CANVAS;
-	private boolean xDerecha;
-	private boolean yAbajo;
+	private boolean movimientoDerecha;
+	private boolean movimientoAbajo;
 	private int velocidad;
 	private double x;
 	private double y;
 	
 	
-	public Pelota(Circle circulo, Canvas canvas) {
+	public Pelota(Circle circulo) {
 		
 		this.CIRCULO = circulo;
-		this.CANVAS = canvas;
-		this.xDerecha = true;
-		this.yAbajo = true;
+		this.POSISION_INICIAL_X = circulo.getLayoutX();
+		this.POSISION_INICIAL_Y = circulo.getLayoutY();
+		this.movimientoDerecha = true;
+		this.movimientoAbajo = true;
 		this.velocidad = VELOCIDAD_INICIAL;
-		this.x = circulo.getLayoutX();
-		this.y = circulo.getLayoutY();
+		this.x = POSISION_INICIAL_X;
+		this.y = POSISION_INICIAL_Y;
 		
 	}
+	
+	
 	
 	public void movimientoPelota() {
 		
-		if(x + (CIRCULO.getRadius()*2)>= CANVAS.getWidth()) {
-			
-			xDerecha = false;
-			
-		}else if(x - CIRCULO.getRadius() <= 0) {
-			
-			xDerecha = true;
-			
-		}
-		
-		if(y - CIRCULO.getRadius() <= 0) {
-			
-			yAbajo = true;
-			
-		}
-		
-		if(y + (CIRCULO.getRadius()*2) >= CANVAS.getHeight()) {
-			
-		//TODO Añadir derrota.
-			//yAbajo = false;
-			Juego.finJuego();
-			
-		}else {
-			
-			movimiento();
-			
-		}
-		
-		//TODO Añadir colisión con Jugador
-		
-		
-	}
-	
-	private void movimiento() {
-		
-		if(xDerecha) {
+		if(movimientoDerecha) {
 			
 			x += velocidad;
 			
@@ -75,7 +42,7 @@ public class Pelota {
 			
 		}
 		
-		if(yAbajo) {
+		if(movimientoAbajo) {
 			
 			y += velocidad;
 			
@@ -87,6 +54,28 @@ public class Pelota {
 		
 		CIRCULO.relocate(x, y);
 		
+	}
+	
+	public void posicionInicial () {
+		
+		
+		x= POSISION_INICIAL_X;
+		y = POSISION_INICIAL_Y;
+		CIRCULO.setLayoutX(POSISION_INICIAL_X);
+		CIRCULO.setLayoutY(POSISION_INICIAL_Y);
+		
+	}
+
+	public Circle getCIRCULO() {
+		return CIRCULO;
+	}
+
+	public void setxDerecha(boolean xDerecha) {
+		this.movimientoDerecha = xDerecha;
+	}
+
+	public void setyAbajo(boolean yAbajo) {
+		this.movimientoAbajo = yAbajo;
 	}
 	
 	

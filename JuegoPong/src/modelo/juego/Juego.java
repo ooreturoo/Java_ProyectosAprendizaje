@@ -2,31 +2,48 @@ package modelo.juego;
 
 
 
+
+import controlador.ControladorVentana;
 import javafx.animation.AnimationTimer;
-import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.canvas.Canvas;
 import modelo.componentes.Jugador;
 import modelo.componentes.Pelota;
 
 public class Juego {
 
-	private static AnchorPane RAIZ;
-	private static AnimationTimer timer;
-	private static Pelota pelota;
-	private static Jugador jugador;
-	private static boolean iniciado;
-	private static double temporizador;
-	private static int puntos;
+	private ControladorVentana controlador;
+	private Canvas canvas;
+	private AnimationTimer timer;
+	private Pelota pelota;
+	private Jugador jugador;
+	private boolean pausado;
 	
-	
-	private static void gameLoop() {
+	public Juego(ControladorVentana controlador, Pelota pelota, Jugador jugador) {
 		
+		this.controlador = controlador;
+		this.canvas = controlador.getFondoCanvas();
+		this.pelota = pelota;
+		this.jugador = jugador;
+		
+	}
+	
+	private void gameLoop() {
+		
+		long tiempoInicio = System.nanoTime();
 		timer = new AnimationTimer() {
 			
+			
+			
 			@Override
-			public void handle(long tiempoEjecucion) {
+			public void handle(long tiempoActual) {
+				long tiempo = (tiempoActual - tiempoInicio) / 1000000000;
 				
-				pelota.movimientoPelota();
+				temporizador(tiempo);
+				controlador.getPuntuacion().setText(jugador.getPuntos() +"");
+				
+				
+				ColisionesObjetos.colisionesPelota(pelota, jugador, canvas, Juego.this);
+				ColisionesObjetos.colisionesJugador(jugador, canvas);
 				
 			}
 		};
@@ -36,55 +53,72 @@ public class Juego {
 	}
 	
 	
-	public static void inicioJuego() {
-		
-		iniciado = true;
+	public void inicioJuego() {
+
 		gameLoop();
 		
 	}
 	
-	public static void finJuego() {
-		
+	
+	public void finJuego() {
 		timer.stop();
-		Button restart = new Button("RESTART");
-		restart.resize(100, 100);
-		restart.setLayoutX(RAIZ.getWidth()/2 - restart.getWidth());
-		restart.setLayoutY(RAIZ.getHeight()/2 - restart.getHeight());
-		RAIZ.getChildren().add(restart);
+		
+		String puntuacionDerrota = controlador.getPuntuacionD().getText();
+		puntuacionDerrota = puntuacionDerrota.replace("X", jugador.getPuntos() +"");
+		controlador.getPuntuacionD().setText(puntuacionDerrota);
+		controlador.getbRestart().setVisible(true);
+		controlador.gettDerrota().setVisible(true);
+		controlador.getPuntuacionD().setVisible(true);
+		
+		
 		
 	}
 	
-	public static void pausaJuego() {
+//	public void pausaJuego() throws InterruptedException {
+//		
+//	
+//	}
+	
+	
+	public void restartJuego() {
+		
+		controlador.gettDerrota().setVisible(false);
+		controlador.getPuntuacionD().setVisible(false);
+		controlador.getbRestart().setVisible(false);
+		resetearPuntos();
+		
+		
+		inicioJuego();
+		
+	}
+	
+	private void resetearPuntos() {
+		
+		jugador.setPuntos(0);
+		controlador.getPuntuacion().setText("0");
 		
 	}
 
-
-	public static void setPelota(Pelota pelota) {
-		Juego.pelota = pelota;
+	
+	private void temporizador(long tiempo) {
+		
+		int segundos = (int) (tiempo%60);
+		int minutos = (int) (tiempo / 60) %60;
+		int horas = (int) (tiempo / 120) % 60;
+		
+		String formato = "%02d:%02d:%02d";
+		formato = String.format(formato, horas, minutos, segundos);
+		controlador.getTemporizador().setText(formato);
+		
 	}
 
-
-	public static void setJugador(Jugador jugador) {
-		Juego.jugador = jugador;
-	}
-	
-
-	public static void setRAIZ(AnchorPane rAIZ) {
-		RAIZ = rAIZ;
+	public boolean isPausado() {
+		return pausado;
 	}
 
-
-	public static boolean isIniciado() {
-		return iniciado;
+	public Jugador getJugador() {
+		return jugador;
 	}
 
-
-	
-	
-	
-	
-	
-	
-	
 	
 }
