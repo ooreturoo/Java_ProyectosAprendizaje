@@ -3,6 +3,9 @@ package modelo.juego;
 
 
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import controlador.ControladorVentana;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
@@ -41,7 +44,6 @@ public class Juego {
 				temporizador(tiempo);
 				controlador.getPuntuacion().setText(jugador.getPuntos() +"");
 				
-				
 				ColisionesObjetos.colisionesPelota(pelota, jugador, canvas, Juego.this);
 				ColisionesObjetos.colisionesJugador(jugador, canvas);
 				
@@ -64,7 +66,18 @@ public class Juego {
 		timer.stop();
 		
 		String puntuacionDerrota = controlador.getPuntuacionD().getText();
-		puntuacionDerrota = puntuacionDerrota.replace("X", jugador.getPuntos() +"");
+		if(puntuacionDerrota.contains("X")) {
+			puntuacionDerrota = puntuacionDerrota.replace("X", jugador.getPuntos() +"");
+		}else {
+			
+			Pattern pattern = Pattern.compile("(\\d+)");
+			Matcher m = pattern.matcher(puntuacionDerrota);
+			if(m.find()) {
+				
+				puntuacionDerrota = puntuacionDerrota.replace(m.group(0), jugador.getPuntos() + "");
+				
+			}
+		}
 		controlador.getPuntuacionD().setText(puntuacionDerrota);
 		controlador.getbRestart().setVisible(true);
 		controlador.gettDerrota().setVisible(true);
@@ -98,6 +111,24 @@ public class Juego {
 		controlador.getPuntuacion().setText("0");
 		
 	}
+	
+	public void subidaNivel() {
+		
+		if(jugador.getPuntos() % 500 == 0) {
+			
+			pelota.decrementarRadio();
+			jugador.decrementarLongitud();
+			
+		}
+		
+		if(jugador.getPuntos() % 1000 == 0) {
+			
+			pelota.incrementarVelocidad();
+			jugador.incrementarVelocidad();
+			
+		}
+	}
+		
 
 	
 	private void temporizador(long tiempo) {

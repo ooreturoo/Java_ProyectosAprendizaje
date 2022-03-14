@@ -35,13 +35,15 @@ public class ColisionesObjetos {
 			
 			jugador.sumarPuntosGolpeo();
 			
+			juego.subidaNivel();
+			
 		}
 		
 		if(y + circuloP.getRadius() >= canvas.getHeight()) {
 			
-			pelota.posicionInicial();
-			jugador.posicionInicial();
 			juego.finJuego();
+			pelota.resetearValores();
+			jugador.resetearValores();
 			
 		}else {
 			
