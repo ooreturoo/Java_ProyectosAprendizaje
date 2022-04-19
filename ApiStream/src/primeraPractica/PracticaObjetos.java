@@ -17,7 +17,7 @@ public class PracticaObjetos {
 		productos.add(new Productos("Huevos", 2.20));
 		productos.add(new Productos("Mermelada", 1.89));
 		productos.add(new Productos("Cereales", 1.57));
-		productos.add(new Productos("Jamón", 5.30));
+		productos.add(new Productos("Jamon", 5.30));
 		productos.add(new Productos("Yogures", 1.99));
 		productos.add(new Productos("Pizza", 1.69));
 		productos.add(new Productos("Chorizo", 1.99));
@@ -26,7 +26,7 @@ public class PracticaObjetos {
 		productos.add(new Productos("Agua", 1.18));
 		productos.add(new Productos("Toallitas", 1.50));
 		productos.add(new Productos("Avena", 0.99));
-		productos.add(new Productos("Zumo de Piña", 2.09));
+		productos.add(new Productos("Zumo de Piï¿½a", 2.09));
 		productos.add(new Productos("Queso Curado", 11.89));
 		
 		//Recogemos en un objeto estadisticas la cantidad, suma, minimo y maximo, y media de los precios de los productos.
