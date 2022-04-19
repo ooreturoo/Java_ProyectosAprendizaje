@@ -5,9 +5,9 @@ import javafx.scene.shape.Rectangle;
 public class Jugador {
 
 	
-	private static final double VELOCIDAD_INICIAL = 4.5;
+	private static final double VELOCIDAD_INICIAL = 2.5;
 	private static final double INCREMENTO_VELOCIDAD = 2.5;
-	private static final int VELOCIDAD_MAXIMA = 9;
+	private static final int VELOCIDAD_MAXIMA = 7;
 	private static final int LONGITUD_MINIMA = 65;
 	private static final int DECREMENTO_LONGITUD = 10;
 	

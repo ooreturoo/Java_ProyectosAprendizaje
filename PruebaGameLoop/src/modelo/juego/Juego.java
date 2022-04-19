@@ -33,26 +33,31 @@ public class Juego {
 	private void gameLoop() {
 		
 		long tiempoInicio = System.nanoTime();
+		double maxfps = 60.0;
+		
 		timer = new AnimationTimer() {
-			
-			
 			int fps = 0;
+			
 			long tiempo2 = System.currentTimeMillis();
 			@Override
 			public void handle(long tiempoActual) {
+				
 				long tiempo = (tiempoActual - tiempoInicio) / 1000000000;
+				
 				
 				temporizador(tiempo);
 				controlador.getPuntuacion().setText(jugador.getPuntos() +"");
 				
 				ColisionesObjetos.colisionesPelota(pelota, jugador, canvas, Juego.this);
 				ColisionesObjetos.colisionesJugador(jugador, canvas);
+				fps ++;
 				
 				if(System.currentTimeMillis() - tiempo2 >= 1000) {
 					System.out.println(fps);
 					tiempo2 += 1000;
 					fps = 0;
 				}
+				
 				
 			}
 		};
