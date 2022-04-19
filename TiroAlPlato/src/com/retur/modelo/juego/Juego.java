@@ -75,13 +75,14 @@ public class Juego extends Thread{
 				
 				actualizarElementos();
 				ultimoRender = System.nanoTime();
+				pintar();
 				delta--;
 				
 			}
 			
 			while(renderizado >= 1) {
 				
-				pintar();
+				
 				ultimoFrame = System.nanoTime();
 				renderizado--;
 				
@@ -91,8 +92,8 @@ public class Juego extends Thread{
 			//TODO Mostrar FPS y APS en la ventada de juego.
 			if(System.currentTimeMillis() - tiempoMilis >= 1000) {
 				
-				System.out.println(contadorAPS);
-				System.out.println(contadorFPS);
+				System.out.println("APS" + contadorAPS);
+				System.out.println("FPS" + contadorFPS);
 				tiempoMilis = System.currentTimeMillis();
 				contadorFPS = 0;
 				contadorAPS = 0;

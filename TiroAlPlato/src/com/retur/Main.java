@@ -18,9 +18,9 @@ public class Main extends Application {
 		try {
 			
 			AnchorPane anchor = new AnchorPane();
-			Scene scene = new Scene(anchor);
+			Scene scene = new Scene(anchor, 1080,720);
 			stage.setScene(scene);
-			stage.setMaximized(true);
+			//stage.setMaximized(true);
 			stage.show();
 			VentanaPrincipal vp = new VentanaPrincipal(anchor);
 			//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());

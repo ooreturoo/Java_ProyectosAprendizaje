@@ -16,7 +16,7 @@ public class ControladorJuego {
 		
 	
 	
-		vj.CANVAS.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+		vj.CANVAS.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent e) {

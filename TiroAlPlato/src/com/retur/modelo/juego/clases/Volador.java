@@ -139,6 +139,8 @@ public class Volador extends Thread implements Disparable{
 		long ultimaActualizacion = System.nanoTime();
 		double delta = 0;
 		long tiempoActualBucle;
+		int apsV = 0;
+		long tiempo = System.currentTimeMillis();
 		
 		while(!recorridoFinalizado) {
 			
@@ -150,13 +152,28 @@ public class Volador extends Thread implements Disparable{
 				mover();
 				disparado();
 				ultimaActualizacion = System.nanoTime();
+				apsV++;
 				delta--;
+			}
+			
+			if((System.currentTimeMillis() - tiempo) >= 1000) {
+				System.out.println("APSV" + apsV);
+				apsV = 0;
+				tiempo = System.currentTimeMillis();
+			}
+			
+			try {
+
+				sleep((tiempoActualBucle - ultimaActualizacion) / nsPorSegundo);
+				
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			
 			
 		}
 		
-		System.out.println("Hilo acabado");
 		
 	}
 	
