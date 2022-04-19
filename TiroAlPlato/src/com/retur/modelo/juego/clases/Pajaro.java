@@ -1,6 +1,8 @@
-package com.retur.modelo.clases;
+package com.retur.modelo.juego.clases;
 
 import java.io.File;
+
+import com.retur.vista.VentanaPrincipal;
 
 public class Pajaro extends Volador {
 
@@ -10,9 +12,9 @@ public class Pajaro extends Volador {
 	private static final int PUNTOS = 25;
 	
 	
-	public Pajaro(Jugador jugador) {
+	public Pajaro(Jugador jugador, VentanaPrincipal vp) {
 		
-		super(DIMENSION_IMAGEN, new File(URL_DISCO), DANYO, PUNTOS, jugador);
+		super(DIMENSION_IMAGEN, new File(URL_DISCO), DANYO, PUNTOS, jugador, vp);
 	
 	}
 	

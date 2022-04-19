@@ -1,11 +1,11 @@
-package com.retur.modelo.clases;
+package com.retur.modelo.juego.clases;
 
 
 import java.io.File;
 
-import com.retur.modelo.interfaces.Disparable;
 import com.retur.modelo.juego.Juego;
-import com.retur.vista.VentanaJuego;
+import com.retur.modelo.juego.interfaces.Disparable;
+import com.retur.vista.VentanaPrincipal;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -26,19 +26,22 @@ public class Volador extends Thread implements Disparable{
 	private final int MAX_SPAWN_Y;
 	private final int DANYO;
 	private final int PUNTOS;
+	private final double ANCHO_VENTANA;
+	private final double ALTO_VENTANA;
+	private final Jugador JUGADOR;
 	
-	private int x;
-	private int y;
+	private double x;
+	private double y;
 	private int velocidad;
 	private boolean recorridoFinalizado;
 	private boolean disparado;
 	private Rectangle contornoColision;
-	private int apsVolador;
-	private Jugador jugador;
 	
-	public Volador(int dimensionImagen, File imgVolador, int danyo, int puntos, Jugador jugador) {
+	public Volador(int dimensionImagen, File imgVolador, int danyo, int puntos, Jugador jugador, VentanaPrincipal vp) {
 		
 		this.DIMENSION_IMAGEN = dimensionImagen;
+		ANCHO_VENTANA = vp.ANCHO_VENTANA;
+		ALTO_VENTANA = vp.ALTO_VENTANA;
 		this.IMAGEN_DISPARADO = new Image(new File("./src/resources/disparado.png").toURI().toString(),
 								DIMENSION_IMAGEN_ELIMINADO,
 								DIMENSION_IMAGEN_ELIMINADO,
@@ -52,14 +55,14 @@ public class Volador extends Thread implements Disparable{
 								false);
 		
 		this.DESPAWN = -DIMENSION_IMAGEN;
-		this.MAX_SPAWN_Y = (int) (VentanaJuego.ALTO_VENTANA / 2.5);
+		this.MAX_SPAWN_Y = (int) (ALTO_VENTANA / 2.5);
 		this.DANYO = danyo;
 		this.PUNTOS = puntos;
 		this.contornoColision = new Rectangle(x,y,DIMENSION_IMAGEN,DIMENSION_IMAGEN);
-		this.x = VentanaJuego.ANCHO_VENTANA + DIMENSION_IMAGEN;
+		this.x = ANCHO_VENTANA + DIMENSION_IMAGEN;
 		this.y = generadorSpawnY();
 		this.velocidad = VELOCIDAD_DEFECTO;
-		this.jugador = jugador;
+		this.JUGADOR = jugador;
 	
 	}
 	
@@ -74,7 +77,6 @@ public class Volador extends Thread implements Disparable{
 			if(!disparado) {
 				
 				x -= velocidad;
-				apsVolador++;
 				
 			}else {
 				
@@ -135,7 +137,6 @@ public class Volador extends Thread implements Disparable{
 		
 		long nsPorSegundo = 1000000000 / Juego.APS;
 		long ultimaActualizacion = System.nanoTime();
-		long tiempoContadorAPS = System.currentTimeMillis();
 		double delta = 0;
 		long tiempoActualBucle;
 		
@@ -149,15 +150,7 @@ public class Volador extends Thread implements Disparable{
 				mover();
 				disparado();
 				ultimaActualizacion = System.nanoTime();
-				apsVolador++;
 				delta--;
-			}
-			
-			
-			if(System.currentTimeMillis() - tiempoContadorAPS >= 1000) {
-				tiempoContadorAPS = System.currentTimeMillis();
-				apsVolador = 0;
-				
 			}
 			
 			
@@ -170,11 +163,11 @@ public class Volador extends Thread implements Disparable{
 	@Override
 	public void disparado() {
 		
-		if(jugador.MIRILLA.getDisparo() != null) {
+		if(JUGADOR.MIRILLA.getDisparo() != null) {
 			
-			if(jugador.MIRILLA.getDisparo().getRangoColision() != null) {
+			if(JUGADOR.MIRILLA.getDisparo().getRangoColision() != null) {
 				
-				Shape colision = Shape.intersect(jugador.MIRILLA.getDisparo().getRangoColision(),contornoColision);
+				Shape colision = Shape.intersect(JUGADOR.MIRILLA.getDisparo().getRangoColision(),contornoColision);
 				
 				if(colision.getLayoutBounds().getWidth() != -1 || colision.getLayoutBounds().getHeight() != -1) {
 					
@@ -216,11 +209,11 @@ public class Volador extends Thread implements Disparable{
 		
 		if(this instanceof Plato) {
 			
-			jugador.setPuntos(jugador.getPuntos() - DANYO);
+			JUGADOR.setPuntos(JUGADOR.getPuntos() - DANYO);
 			
 		}else {
 			
-			jugador.setPuntos(jugador.getPuntos() + PUNTOS);
+			JUGADOR.setPuntos(JUGADOR.getPuntos() + PUNTOS);
 			
 		}
 		
@@ -228,14 +221,6 @@ public class Volador extends Thread implements Disparable{
 
 	public boolean isRecorridoFinalizado() {
 		return recorridoFinalizado;
-	}
-
-	public int getApsVolador() {
-		return apsVolador;
-	}
-
-	public void setApsVolador(int apsVolador) {
-		this.apsVolador = apsVolador;
 	}
 
 	public Rectangle getContornoColision() {

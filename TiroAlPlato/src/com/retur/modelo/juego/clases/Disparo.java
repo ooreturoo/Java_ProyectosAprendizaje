@@ -1,4 +1,4 @@
-package com.retur.modelo.clases;
+package com.retur.modelo.juego.clases;
 
 import javafx.scene.shape.Rectangle;
 

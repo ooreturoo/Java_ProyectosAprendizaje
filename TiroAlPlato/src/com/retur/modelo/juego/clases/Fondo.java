@@ -1,8 +1,8 @@
-package com.retur.modelo.clases;
+package com.retur.modelo.juego.clases;
 
 import java.io.File;
 
-import com.retur.vista.VentanaJuego;
+import com.retur.vista.VentanaPrincipal;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -10,15 +10,15 @@ import javafx.scene.image.Image;
 public class Fondo {
 
 	private final String DIR_IMAGEN;
-	private final int ALTO;
-	private final int ANCHO;
+	private final double ALTO;
+	private final double ANCHO;
 	private final Image IMAGEN;
 	
 	
-	public Fondo() {
+	public Fondo(VentanaPrincipal vp) {
 		
-		this.ALTO = VentanaJuego.ALTO_VENTANA;
-		this.ANCHO = VentanaJuego.ANCHO_VENTANA;
+		this.ANCHO = vp.ANCHO_VENTANA;
+		this.ALTO = vp.ALTO_VENTANA;
 		this.DIR_IMAGEN = "./src/resources/cielo.jpg";
 		this.IMAGEN = new Image(new File(DIR_IMAGEN).toURI().toString(), ANCHO, ALTO , false, false);
 		

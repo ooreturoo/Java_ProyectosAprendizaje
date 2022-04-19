@@ -1,9 +1,9 @@
 package com.retur.controlador;
 
 
-import com.retur.modelo.clases.Jugador;
 import com.retur.modelo.juego.Juego;
-import com.retur.vista.VentanaJuego;
+import com.retur.modelo.juego.clases.Jugador;
+import com.retur.vista.VentanaPrincipal;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
@@ -12,7 +12,7 @@ public class ControladorJuego {
 	
 	private ControladorJuego() {}
 	
-	public static void asignarEventos(VentanaJuego vj, Juego juego) {
+	public static void asignarEventos(VentanaPrincipal vj, Juego juego) {
 		
 	
 	

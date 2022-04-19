@@ -1,4 +1,4 @@
-package com.retur.modelo.interfaces;
+package com.retur.modelo.juego.interfaces;
 
 
 public interface Disparable {

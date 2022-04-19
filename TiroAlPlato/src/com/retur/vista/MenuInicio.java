@@ -1,5 +1,5 @@
 package com.retur.vista;
 
-public class VentanaJuego {
+public class MenuInicio {
 
 }

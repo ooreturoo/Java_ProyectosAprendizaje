@@ -3,27 +3,31 @@ package com.retur;
 
 import com.retur.controlador.ControladorJuego;
 import com.retur.modelo.juego.Juego;
-import com.retur.vista.VentanaJuego;
+import com.retur.vista.VentanaPrincipal;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 
 
 public class Main extends Application {
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(Stage stage) {
 		try {
 			
-			VentanaJuego vj = new VentanaJuego();
-			Scene scene = new Scene(vj.RAIZ);
+			AnchorPane anchor = new AnchorPane();
+			Scene scene = new Scene(anchor);
+			stage.setScene(scene);
+			stage.setMaximized(true);
+			stage.show();
+			VentanaPrincipal vp = new VentanaPrincipal(anchor);
 			//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.show();
 			scene.setCursor(Cursor.NONE);
-			Juego juego = new Juego(vj.CANVAS.getGraphicsContext2D());
-			ControladorJuego.asignarEventos(vj,juego);
+			Juego juego = new Juego(vp);
+			ControladorJuego.asignarEventos(vp,juego);
+			//Añadir menu inicial
 			juego.start();
 		} catch(Exception e) {
 			e.printStackTrace();

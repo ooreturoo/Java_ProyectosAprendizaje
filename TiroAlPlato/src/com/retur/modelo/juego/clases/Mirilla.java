@@ -1,8 +1,8 @@
-package com.retur.modelo.clases;
+package com.retur.modelo.juego.clases;
 
 import java.io.File;
 
-import com.retur.vista.VentanaJuego;
+import com.retur.vista.VentanaPrincipal;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -20,6 +20,10 @@ public class Mirilla {
 			true,
 			true);
 	
+	private final double ANCHO_VENTANA;
+	private final double ALTO_VENTANA;
+	
+	
 	private Disparo disparo;
 	private boolean disparoDisponible;
 	private long ultimoDisparo;
@@ -27,22 +31,24 @@ public class Mirilla {
 	private double y;
 	
 	
-	public Mirilla() {
+	public Mirilla(VentanaPrincipal vp) {
 		
-		this.ultimoDisparo = System.currentTimeMillis();
+		ANCHO_VENTANA = vp.ANCHO_VENTANA;
+		ALTO_VENTANA = vp.ALTO_VENTANA;
+		ultimoDisparo = System.currentTimeMillis();
 		
 	}
 	
 	
 	public void mover(double x, double y) {
 		
-		if((x - DIMENSION_CENTRO_CURSOR) >= 0 && (x + DIMENSION_CENTRO_CURSOR) <= VentanaJuego.ANCHO_VENTANA) {
+		if((x - DIMENSION_CENTRO_CURSOR) >= 0 && (x + DIMENSION_CENTRO_CURSOR) <= ANCHO_VENTANA) {
 			
 			this.x = x - DIMENSION_CENTRO_CURSOR;
 			
 		}
 		
-		if((y - DIMENSION_CENTRO_CURSOR) >= 0 && (y + DIMENSION_CENTRO_CURSOR) <= VentanaJuego.ALTO_VENTANA) {
+		if((y - DIMENSION_CENTRO_CURSOR) >= 0 && (y + DIMENSION_CENTRO_CURSOR) <= ALTO_VENTANA) {
 			
 			this.y = y - DIMENSION_CENTRO_CURSOR;
 			
