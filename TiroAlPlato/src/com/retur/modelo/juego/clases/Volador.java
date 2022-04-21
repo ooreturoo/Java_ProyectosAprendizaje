@@ -5,7 +5,7 @@ import java.io.File;
 
 import com.retur.modelo.juego.Juego;
 import com.retur.modelo.juego.interfaces.Disparable;
-import com.retur.vista.VentanaPrincipal;
+import com.retur.vista.VentanaJuego;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -24,7 +24,7 @@ public class Volador extends Thread implements Disparable{
 	private final int DESPAWN;
 	private final int DIMENSION_IMAGEN;
 	private final int MAX_SPAWN_Y;
-	private final int DANYO;
+	private final double DANYO;
 	private final int PUNTOS;
 	private final double ANCHO_VENTANA;
 	private final double ALTO_VENTANA;
@@ -37,11 +37,11 @@ public class Volador extends Thread implements Disparable{
 	private boolean disparado;
 	private Rectangle contornoColision;
 	
-	public Volador(int dimensionImagen, File imgVolador, int danyo, int puntos, Jugador jugador, VentanaPrincipal vp) {
+	public Volador(int dimensionImagen, File imgVolador, double danyo, int puntos, Jugador jugador, VentanaJuego vj) {
 		
 		this.DIMENSION_IMAGEN = dimensionImagen;
-		ANCHO_VENTANA = vp.ANCHO_VENTANA;
-		ALTO_VENTANA = vp.ALTO_VENTANA;
+		this.ANCHO_VENTANA = vj.ANCHO_VENTANA_JUEGO;
+		this.ALTO_VENTANA = vj.ALTO_VENTANA_JUEGO;
 		this.IMAGEN_DISPARADO = new Image(new File("./src/resources/disparado.png").toURI().toString(),
 								DIMENSION_IMAGEN_ELIMINADO,
 								DIMENSION_IMAGEN_ELIMINADO,
@@ -66,11 +66,11 @@ public class Volador extends Thread implements Disparable{
 	
 	}
 	
-	private void mover() {
+	private void mover(){
 		
 		if(x <= DESPAWN) {
 			
-			recorridoFinalizado = true;
+			salvado();
 			
 		}else {
 			
@@ -81,20 +81,14 @@ public class Volador extends Thread implements Disparable{
 			}else {
 				
 				
-				try {
-					sleep(500);
-					recorridoFinalizado = true;
-					this.join();
-				} catch (InterruptedException e) {
-					
-					e.printStackTrace();
-				}
+				disparado();
 				
 			}
 			
+			contornoColision.relocate(x, y);
+			
 		}
 		
-		contornoColision.relocate(x, y);
 		
 	}
 	
@@ -112,6 +106,7 @@ public class Volador extends Thread implements Disparable{
 				gc.drawImage(IMAGEN_DISPARADO, x, y);
 				
 			}else {
+				
 				gc.setStroke(Color.RED);
 				gc.strokeRect(x,y,DIMENSION_IMAGEN,DIMENSION_IMAGEN);
 				gc.drawImage(IMAGEN_VOLADOR, x, y);
@@ -129,56 +124,81 @@ public class Volador extends Thread implements Disparable{
 	private int generadorSpawnY() {
 
 		return (int) (Math.random() * MAX_SPAWN_Y);
+		
 	}
 
 
 	@Override
 	public void run() {
+
 		
-		long nsPorSegundo = 1000000000 / Juego.APS;
+		double nsPorSegundo = 1000000000 / Juego.APS;
 		long ultimaActualizacion = System.nanoTime();
 		double delta = 0;
 		long tiempoActualBucle;
-		int apsV = 0;
-		long tiempo = System.currentTimeMillis();
+
 		
 		while(!recorridoFinalizado) {
 			
 			tiempoActualBucle = System.nanoTime();
 			
 			delta += (tiempoActualBucle - ultimaActualizacion) / nsPorSegundo;
+			ultimaActualizacion = tiempoActualBucle;
 			
 			while(delta >= 1) {
-				mover();
-				disparado();
-				ultimaActualizacion = System.nanoTime();
-				apsV++;
-				delta--;
-			}
 			
-			if((System.currentTimeMillis() - tiempo) >= 1000) {
-				System.out.println("APSV" + apsV);
-				apsV = 0;
-				tiempo = System.currentTimeMillis();
+				mover();
+				comprobarAlcanzado();
+				delta--;
+				
 			}
 			
 			try {
-
-				sleep((tiempoActualBucle - ultimaActualizacion) / nsPorSegundo);
-				
+			
+				sleep(0,(int) ((delta)*100000));
+			
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
+			
 			}
 			
 			
 		}
-		
+	
 		
 	}
 	
 	@Override
-	public void disparado() {
+	public void disparado(){
+		
+		try {
+			
+			sleep(500);
+			if(this instanceof Pajaro) {
+				
+				System.out.println(JUGADOR.getVidas());
+				JUGADOR.reducirVidas(DANYO);
+				
+			}else {
+				
+				System.out.println(JUGADOR.getVidas());
+				JUGADOR.aumentarPuntos(PUNTOS);
+				
+			}
+			recorridoFinalizado = true;
+			
+			
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+		
+		}
+		
+	}
+	
+	@Override
+	public void comprobarAlcanzado() {
 		
 		if(JUGADOR.MIRILLA.getDisparo() != null) {
 			
@@ -196,37 +216,16 @@ public class Volador extends Thread implements Disparable{
 			
 		}
 		
-		
-		
-		
-//		if(this instanceof Pajaro) {
-//			
-//			if(jugador.getVidas()-DANYO <= 0) {
-//				
-//				jugador.setVidas(jugador.getVidas() - DANYO);
-//				
-//			}else {
-//				
-//				jugador.setVidas(0);
-//				
-//			}
-//			
-//		}else {
-//			
-//			jugador.setPuntos(PUNTOS);
-//			
-//		}
-		
 	}
 	
 	@Override
-	public void salvado() {
+	public void salvado(){
 		
 		recorridoFinalizado = true;
 		
 		if(this instanceof Plato) {
 			
-			JUGADOR.setPuntos(JUGADOR.getPuntos() - DANYO);
+			JUGADOR.reducirVidas(DANYO);
 			
 		}else {
 			
@@ -244,10 +243,5 @@ public class Volador extends Thread implements Disparable{
 		return contornoColision;
 	}
 
-	
-
-
-	
-	
 	
 }

@@ -2,7 +2,7 @@ package com.retur.modelo.juego.clases;
 
 import java.io.File;
 
-import com.retur.vista.VentanaPrincipal;
+import com.retur.vista.VentanaJuego;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -31,10 +31,10 @@ public class Mirilla {
 	private double y;
 	
 	
-	public Mirilla(VentanaPrincipal vp) {
+	public Mirilla(VentanaJuego vj) {
 		
-		ANCHO_VENTANA = vp.ANCHO_VENTANA;
-		ALTO_VENTANA = vp.ALTO_VENTANA;
+		ANCHO_VENTANA = vj.ANCHO_VENTANA_JUEGO;
+		ALTO_VENTANA = vj.ALTO_VENTANA_JUEGO;
 		ultimoDisparo = System.currentTimeMillis();
 		
 	}

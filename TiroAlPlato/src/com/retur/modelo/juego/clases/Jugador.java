@@ -1,6 +1,6 @@
 package com.retur.modelo.juego.clases;
 
-import com.retur.vista.VentanaPrincipal;
+import com.retur.vista.VentanaJuego;
 
 public class Jugador{
 
@@ -11,9 +11,10 @@ public class Jugador{
 	private double vidas;
 	private int puntos;
 	
-	public Jugador(VentanaPrincipal vp) {
+	public Jugador(VentanaJuego vj) {
 		
-		MIRILLA = new Mirilla(vp);
+		MIRILLA = new Mirilla(vj);
+		vidas = VIDAS_MAXIMAS;
 	
 	}
 	
@@ -27,13 +28,20 @@ public class Jugador{
 		
 	}
 	
+	
 	public void reducirVidas(double vidasPerdidas) {
 		
 		if(vidas > 0) {
 			
-			vidas = (vidas - vidasPerdidas) < 0 ? 0 : vidas - vidasPerdidas;
+			vidas = (vidas - vidasPerdidas) <= 0 ? 0 : vidas - vidasPerdidas;
 			
 		}
+		
+	}
+	
+	public void aumentarPuntos(int puntos) {
+		
+		puntos += puntos;
 		
 	}
 	
@@ -56,5 +64,7 @@ public class Jugador{
 	public void setPuntos(int puntos) {
 		this.puntos = puntos;
 	}
+
+	
 	
 }

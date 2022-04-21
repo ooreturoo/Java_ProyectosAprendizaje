@@ -10,12 +10,14 @@ public class Disparo extends Thread{
 
 	@Override
 	public void run() {
+		
 		try {
 			sleep(20);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		rangoColision = null;
+		
 	}
 
 	public Rectangle getRangoColision() {

@@ -6,8 +6,7 @@ import com.retur.modelo.juego.clases.Jugador;
 import com.retur.modelo.juego.clases.Pajaro;
 import com.retur.modelo.juego.clases.Plato;
 import com.retur.modelo.juego.clases.Volador;
-import com.retur.modelo.juego.comprobaciones.Comprobaciones;
-import com.retur.vista.VentanaPrincipal;
+import com.retur.vista.VentanaJuego;
 
 import javafx.scene.canvas.GraphicsContext;
 
@@ -18,23 +17,22 @@ public class Juego extends Thread{
 	public static final int CAPACIDAD_VOLADORES = 10;
 	
 	private final GraphicsContext GC;
-	private final VentanaPrincipal VP;
-	private final Fondo fondo;
-	private final Jugador jugador;
-	private final Volador[] voladores;
+	private final VentanaJuego VJ;
+	private final Fondo FONDO;
+	private final Jugador JUGADOR;
+	private final Volador[] VOLADORES;
 	
 	private int contadorFPS;
 	private int contadorAPS;
 	private boolean iniciado;
-	private boolean derrotaJugador;
 	
-	public Juego(VentanaPrincipal vp) {
+	public Juego(VentanaJuego vj) {
 		
-		this.fondo = new Fondo(vp);
-		this.jugador = new Jugador(vp);
-		this.voladores = new Volador[CAPACIDAD_VOLADORES];
-		this.VP = vp;
-		this.GC = vp.CANVAS.getGraphicsContext2D();
+		this.FONDO = new Fondo(vj);
+		this.JUGADOR = new Jugador(vj);
+		this.VOLADORES = new Volador[CAPACIDAD_VOLADORES];
+		this.VJ = vj;
+		this.GC = vj.CANVAS.getGraphicsContext2D();
 		
 	}
 	
@@ -46,10 +44,9 @@ public class Juego extends Thread{
 	
 	private void gameLoop() {
 		
-		long nsPorSegundoFPS = 1000000000 / FPS;
-		long nsPorSegundoAPS = 1000000000 / APS;
-		long ultimoFrame = System.nanoTime();
-		long ultimoRender = System.nanoTime();
+		double nsPorSegundoFPS = 1000000000 / FPS;
+		double nsPorSegundoAPS = 1000000000 / APS;
+		long tiempoTranscurrido = System.nanoTime();
 		long tiempoActual;
 		long tiempoMilis = System.currentTimeMillis();
 		long ultimoVolador = System.currentTimeMillis();
@@ -60,9 +57,11 @@ public class Juego extends Thread{
 			
 			tiempoActual = System.nanoTime();
 			
-			delta += (tiempoActual - ultimoRender) / nsPorSegundoFPS;
-			renderizado += (tiempoActual - ultimoFrame) / nsPorSegundoAPS;
+			delta += (tiempoActual - tiempoTranscurrido) / nsPorSegundoFPS;
+			renderizado += ((tiempoActual - tiempoTranscurrido) / nsPorSegundoAPS);
+			tiempoTranscurrido = tiempoActual;
 			
+
 			if(System.currentTimeMillis() - ultimoVolador >= 500) {
 				
 				eliminarVolador();
@@ -74,18 +73,21 @@ public class Juego extends Thread{
 			while(delta >= 1) {
 				
 				actualizarElementos();
-				ultimoRender = System.nanoTime();
-				pintar();
 				delta--;
 				
 			}
 			
 			while(renderizado >= 1) {
 				
-				
-				ultimoFrame = System.nanoTime();
+				pintar();
 				renderizado--;
 				
+			}
+			
+			try {
+				sleep(0,(int) ((delta)*100000));
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
 			
 			
@@ -104,41 +106,44 @@ public class Juego extends Thread{
 		
 	}
 	
-	private void finalizarJuego() {
-		
-		
-		
-	}
+
 	
 	private void actualizarElementos() {
 		
-		jugador.MIRILLA.regargaDisparo();
-		derrotaJugador = Comprobaciones.comprobarVidaJugador();
-		if(derrotaJugador) {
+		JUGADOR.MIRILLA.regargaDisparo();
+		//VJ.PANEL_PUNTUACION.setText("ww");
+		//VJ.PANEL_VIDAS.setText("VIDAS: " + JUGADOR.getVidas());
+		comprobacionFinalJuego();
+		contadorAPS++;
+		
+	}
+	
+	private void comprobacionFinalJuego() {
+		
+		if (JUGADOR.getVidas() == 0) {
 			
-			finalizarJuego();
+			iniciado = false;
 			
 		}
-		contadorAPS++;
 		
 	}
  
 	
 	private void pintar() {
 		
-		fondo.pintar(GC);
+		FONDO.pintar(GC);
 		
-		for(int i = 0; i < voladores.length; i++) {
+		for(int i = 0; i < VOLADORES.length; i++) {
 			
-			if(voladores[i] != null) {
+			if(VOLADORES[i] != null) {
 				
-				voladores[i].pintar(GC);
+				VOLADORES[i].pintar(GC);
 				
 			}
 			
 		}
 		
-		jugador.MIRILLA.pintar(GC);
+		JUGADOR.MIRILLA.pintar(GC);
 		contadorFPS++;
 		
 	}
@@ -147,13 +152,13 @@ public class Juego extends Thread{
 		
 		for(int i = 0; i < CAPACIDAD_VOLADORES; i++) {
 			
-			Volador volador = voladores[i];
+			Volador volador = VOLADORES[i];
 			
 			if(volador != null) {
 				
 				if(volador.isRecorridoFinalizado()) {
 					
-					voladores[i] = null;
+					VOLADORES[i] = null;
 					
 				}
 				
@@ -170,10 +175,10 @@ public class Juego extends Thread{
 		
 		for(int i = 0; i < CAPACIDAD_VOLADORES && !generado; i++) {
 			
-			if(voladores[i] == null) {
+			if(VOLADORES[i] == null) {
 				
-				voladores[i] = voladorAleatorio();
-				voladores[i].start();
+				VOLADORES[i] = voladorAleatorio();
+				VOLADORES[i].start();
 				generado = true;
 				
 			}
@@ -186,17 +191,17 @@ public class Juego extends Thread{
 	private Volador voladorAleatorio() {
 		double num = Math.random();
 		
-		Volador volador = num < 0.9 ? new Plato(jugador,VP) : new Pajaro(jugador,VP);
+		Volador volador = num < 0.9 ? new Plato(JUGADOR,VJ) : new Pajaro(JUGADOR,VJ);
 		
 		return volador;
 	}
 
 	public Jugador getJugador() {
-		return jugador;
+		return JUGADOR;
 	}
 
 	public Volador[] getVoladores() {
-		return voladores;
+		return VOLADORES;
 	}
 	
 }

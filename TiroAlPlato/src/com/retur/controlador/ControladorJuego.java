@@ -3,25 +3,41 @@ package com.retur.controlador;
 
 import com.retur.modelo.juego.Juego;
 import com.retur.modelo.juego.clases.Jugador;
-import com.retur.vista.VentanaPrincipal;
+import com.retur.vista.VentanaJuego;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-public class ControladorJuego {
+import javafx.stage.Stage;
+public class ControladorJuego extends Thread {
 
+	public final VentanaJuego VJ;
+	public final Juego JUEGO;
+	public final Stage STAGE;
 	
-	private ControladorJuego() {}
-	
-	public static void asignarEventos(VentanaPrincipal vj, Juego juego) {
+	public ControladorJuego(Stage stage) {
 		
+		STAGE = stage;
+		VJ = new VentanaJuego(STAGE.getWidth(), STAGE.getHeight());
+		JUEGO = new Juego(VJ);
+		crearEventos();
+		
+	}
 	
+	@Override
+	public void run() {
+		iniciarJuego();
+		
+		mostrarPuntuacion();
+	}
 	
-		vj.CANVAS.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+	private void crearEventos() {
+	
+		VJ.CANVAS.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent e) {
 				
-				Jugador jugador = juego.getJugador();
+				Jugador jugador = JUEGO.getJugador();
 
 				jugador.MIRILLA.disparar();
 				
@@ -31,16 +47,38 @@ public class ControladorJuego {
 			
 		});;
 		
-		vj.CANVAS.addEventHandler(MouseEvent.MOUSE_MOVED, new EventHandler<MouseEvent>() {
+		VJ.CANVAS.addEventHandler(MouseEvent.MOUSE_MOVED, new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent e) {
 				
-				juego.getJugador().MIRILLA.mover(e.getX(), e.getY());
+				JUEGO.getJugador().MIRILLA.mover(e.getX(), e.getY());
 				
 			}
 		});
+		
+	}
+	
+	private void iniciarJuego() {
+		
+		JUEGO.start();
+		
+		try {
+			JUEGO.join();
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+			
+		}
+		
+		System.out.println("Hola");
+		
 	}
 
+	public void mostrarPuntuacion() {
+		
+		new ControladorPuntuacion();
+		
+	}
 	
 }
