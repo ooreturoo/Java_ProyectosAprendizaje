@@ -33,7 +33,7 @@ public class ControladorMenuInicial {
 				Stage stage = (Stage) nodo.getScene().getWindow();
 				ControladorJuego controlador = new ControladorJuego(stage);
 				stage.setScene(controlador.VJ.ESCENA_JUEGO);
-				controlador.start();
+				controlador.iniciarJuego();
 				
 			}
 		});

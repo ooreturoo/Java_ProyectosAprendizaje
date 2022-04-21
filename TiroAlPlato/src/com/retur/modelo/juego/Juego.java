@@ -57,8 +57,8 @@ public class Juego extends Thread{
 			
 			tiempoActual = System.nanoTime();
 			
-			delta += (tiempoActual - tiempoTranscurrido) / nsPorSegundoFPS;
-			renderizado += ((tiempoActual - tiempoTranscurrido) / nsPorSegundoAPS);
+			delta += (tiempoActual - tiempoTranscurrido) / nsPorSegundoAPS;
+			renderizado += ((tiempoActual - tiempoTranscurrido) / nsPorSegundoFPS);
 			tiempoTranscurrido = tiempoActual;
 			
 
@@ -111,8 +111,6 @@ public class Juego extends Thread{
 	private void actualizarElementos() {
 		
 		JUGADOR.MIRILLA.regargaDisparo();
-		//VJ.PANEL_PUNTUACION.setText("ww");
-		//VJ.PANEL_VIDAS.setText("VIDAS: " + JUGADOR.getVidas());
 		comprobacionFinalJuego();
 		contadorAPS++;
 		

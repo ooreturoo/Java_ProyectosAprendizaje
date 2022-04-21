@@ -5,10 +5,13 @@ import com.retur.modelo.juego.Juego;
 import com.retur.modelo.juego.clases.Jugador;
 import com.retur.vista.VentanaJuego;
 
+
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-public class ControladorJuego extends Thread {
+
+
+public class ControladorJuego{
 
 	public final VentanaJuego VJ;
 	public final Juego JUEGO;
@@ -23,12 +26,6 @@ public class ControladorJuego extends Thread {
 		
 	}
 	
-	@Override
-	public void run() {
-		iniciarJuego();
-		
-		mostrarPuntuacion();
-	}
 	
 	private void crearEventos() {
 	
@@ -59,19 +56,12 @@ public class ControladorJuego extends Thread {
 		
 	}
 	
-	private void iniciarJuego() {
+	public void iniciarJuego() {
 		
 		JUEGO.start();
+
 		
-		try {
-			JUEGO.join();
-		} catch (InterruptedException e) {
-			
-			e.printStackTrace();
-			
-		}
 		
-		System.out.println("Hola");
 		
 	}
 
