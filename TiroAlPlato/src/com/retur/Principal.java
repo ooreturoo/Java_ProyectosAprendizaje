@@ -2,9 +2,6 @@ package com.retur;
 	
 
 import com.retur.controlador.ControladorPrincipal;
-import com.retur.controlador.ControladorPuntuacion;
-import com.retur.modelo.juego.clases.Jugador;
-import com.retur.vista.VentanaJuego;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -31,9 +28,6 @@ public class Principal extends Application {
 			//Se crea un objeto del controlador de la ventana principal y se muestra en el stage.
 			new ControladorPrincipal(stage).mostrarVentanaPrincipal(stage);
 			
-			//TODO Para comprobar la ventana de puntuacion.
-			//ControladorPuntuacion controlador = new ControladorPuntuacion(stage);
-			//controlador.mostrarPuntuacion(new Jugador(new VentanaJuego(stage.getScene().getWidth(), stage.getScene().getHeight())));
 			
 		} catch(Exception e) {
 			e.printStackTrace();

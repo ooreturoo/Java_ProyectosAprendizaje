@@ -5,6 +5,9 @@ package com.retur.controlador;
 import com.retur.modelo.juego.clases.Jugador;
 import com.retur.vista.VentanaPuntuacion;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.stage.Stage;
 
 
@@ -17,10 +20,15 @@ public class ControladorPuntuacion {
 	private final VentanaPuntuacion VPNT;
 	
 
+	/**
+	 * Constructor que recibe una ventana.
+	 * @param stage Ventana de la aplicación
+	 */
 	public ControladorPuntuacion(Stage stage) {
 		
 		VPNT = new VentanaPuntuacion(stage.getScene().getWidth(), stage.getScene().getHeight());
-
+		eventoBotonPuntuacion();
+		
 	}
 	
 	/**
@@ -32,6 +40,28 @@ public class ControladorPuntuacion {
 		
 		VPNT.mostrarPuntuacion(jugador);
 		stage.setScene(VPNT.ESCENA);
+		
+	}
+	
+	private void eventoBotonPuntuacion() {
+		
+		VPNT.BOTON.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent e) {
+				
+				Node nodo = (Node) e.getSource();
+				
+				Stage stage = (Stage) nodo.getScene().getWindow();
+				
+				new ControladorPrincipal(stage).mostrarVentanaPrincipal(stage);
+				
+			}
+			
+			
+			
+		});
+		
 		
 	}
 

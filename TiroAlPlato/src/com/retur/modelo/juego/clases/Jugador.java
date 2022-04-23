@@ -1,7 +1,12 @@
 package com.retur.modelo.juego.clases;
 
-import com.retur.vista.VentanaJuego;
 
+
+/**
+ * Clase que representa al jugador.
+ * @author Sergio
+ *
+ */
 public class Jugador{
 
 	private static final int VIDAS_MAXIMAS = 5;
@@ -11,13 +16,22 @@ public class Jugador{
 	private double vidas;
 	private int puntos;
 	
-	public Jugador(VentanaJuego vj) {
+	/**
+	 * Crea una instancia de Jugador almacenando valores en sus atributos.
+	 * @param anchoVentana Recibe el ancho de la ventana.
+	 * @param altoVentana Recibe el alto de la ventana.
+	 */
+	public Jugador(double anchoVentana, double altoVentana) {
 		
-		MIRILLA = new Mirilla(vj);
+		MIRILLA = new Mirilla(anchoVentana, altoVentana);
 		vidas = VIDAS_MAXIMAS;
 	
 	}
 	
+	/**
+	 * Aumenta las vidas del jugador.
+	 * @param vidasObtenidas Número de vidas obtenidas
+	 */
 	public void aumentarVidas(double vidasObtenidas) {
 		
 		if(vidas < VIDAS_MAXIMAS ) {
@@ -29,6 +43,10 @@ public class Jugador{
 	}
 	
 	
+	/**
+	 * Reduce las vidas del jugador.
+	 * @param vidasPerdidas Número de vidas perdidas.
+	 */
 	public void reducirVidas(double vidasPerdidas) {
 		
 		if(vidas > 0) {
@@ -39,6 +57,10 @@ public class Jugador{
 		
 	}
 	
+	/**
+	 * Aumenta los puntos del jugador.
+	 * @param puntos Cantidad de puntos que aumentar.
+	 */
 	public void aumentarPuntos(int puntos) {
 		
 		this.puntos += puntos;

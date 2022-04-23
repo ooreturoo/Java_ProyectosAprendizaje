@@ -9,11 +9,20 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+/**
+ * Clase que representa una ventana al inicio de la aplicación.
+ * @author Sergio
+ *
+ */
 public class VentanaPrincipal extends VentanaMenu {
 
 	protected static final int DIMENSION_FUENTE_TITULO = 50;
 	
-	
+	/**
+	 * Crea una instancia de VentanaPrincipal
+	 * @param ancho Ancho para el tamaño de la escena
+	 * @param alto Alto para el tamaño de la escena
+	 */
 	public VentanaPrincipal(double ancho, double alto) {
 		
 		super(ancho, alto);

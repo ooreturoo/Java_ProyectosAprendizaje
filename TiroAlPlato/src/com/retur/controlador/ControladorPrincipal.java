@@ -19,6 +19,10 @@ public class ControladorPrincipal{
 	private final VentanaPrincipal VP;
 
 	
+	/**
+	 * Constructor que recibe una ventana.
+	 * @param stage Ventana de la aplicación
+	 */
 	public ControladorPrincipal(Stage stage) {
 		
 		VP = new VentanaPrincipal(stage.getScene().getWidth(), stage.getScene().getHeight());

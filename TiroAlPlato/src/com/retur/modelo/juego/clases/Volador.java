@@ -9,14 +9,19 @@ import com.retur.vista.VentanaJuego;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
-public class Volador extends Thread implements Disparable{
+
+/**
+ * Clase que padre de todos los elementos voladores.
+ * @author Sergio
+ *
+ */
+public abstract class Volador extends Thread implements Disparable{
 
 	private static final int VELOCIDAD_DEFECTO = 3;
-	private static final int DIMENSION_IMAGEN_ELIMINADO = 70;
+	private static final int DIMENSION_IMAGEN_DISPARADO = 70;
 
 	
 	private final Image IMAGEN_DISPARADO;
@@ -37,14 +42,24 @@ public class Volador extends Thread implements Disparable{
 	private boolean disparado;
 	private Rectangle contornoColision;
 	
+	
+	/**
+	 * Crea una instancia de Volador
+	 * @param dimensionImagen La dimensión de la imagen del volador (El mismo ancho que alto)
+	 * @param imgVolador Ruta de la imagen del volador.
+	 * @param danyo El daño que le hará al jugador.
+	 * @param puntos Los puntos que dará al jugador
+	 * @param jugador El jugador para la gestión de puntos y vidas.
+	 * @param vj La ventana de juego para obtener las medidas y acceder al Canvas.
+	 */
 	public Volador(int dimensionImagen, File imgVolador, double danyo, int puntos, Jugador jugador, VentanaJuego vj) {
 		
 		this.DIMENSION_IMAGEN = dimensionImagen;
 		this.ANCHO_VENTANA = vj.ANCHO_VENTANA;
 		this.ALTO_VENTANA = vj.ALTO_VENTANA;
 		this.IMAGEN_DISPARADO = new Image(new File("./src/resources/disparado.png").toURI().toString(),
-								DIMENSION_IMAGEN_ELIMINADO,
-								DIMENSION_IMAGEN_ELIMINADO,
+								DIMENSION_IMAGEN_DISPARADO,
+								DIMENSION_IMAGEN_DISPARADO,
 								true,
 								false);
 		
@@ -66,6 +81,9 @@ public class Volador extends Thread implements Disparable{
 	
 	}
 	
+	/**
+	 * Mueve la posición del obejto volador.
+	 */
 	private void mover(){
 		
 		if(x <= DESPAWN) {
@@ -95,7 +113,7 @@ public class Volador extends Thread implements Disparable{
 	/**
 	 * Se encarga de pintar el objeto en el canvas y dependiendo del valor de 'disparado'
 	 * pintara una imagen u otra.
-	 * @param gc Recibe un GraphicsContext.
+	 * @param gc 
 	 */
 	public void pintar(GraphicsContext gc) {
 		
@@ -107,8 +125,9 @@ public class Volador extends Thread implements Disparable{
 				
 			}else {
 				
-				gc.setStroke(Color.RED);
-				gc.strokeRect(x,y,DIMENSION_IMAGEN,DIMENSION_IMAGEN);
+				//Pintar el rango de colisión de los objetos.
+				//gc.setStroke(Color.RED);
+				//gc.strokeRect(x,y,DIMENSION_IMAGEN,DIMENSION_IMAGEN);
 				gc.drawImage(IMAGEN_VOLADOR, x, y);
 				
 			}
@@ -138,13 +157,26 @@ public class Volador extends Thread implements Disparable{
 		long tiempoActualBucle;
 
 		
+		/*
+		 * Se inicia el bucle que realizaras las acciones del volador hasta que llegue a su destino
+		 * o sea disparado por el camino.
+		 */
 		while(!recorridoFinalizado) {
 			
 			tiempoActualBucle = System.nanoTime();
 			
+			/*
+			 * Almacenamos la cantidad de Actualizaciones que corresponden dependiendo
+			 * del tiempo transcurrido entre vueltas de bucle para obtener las cantidades límites
+			 * establecidas.
+			 */
 			delta += (tiempoActualBucle - ultimaActualizacion) / nsPorSegundo;
 			ultimaActualizacion = tiempoActualBucle;
 			
+			/*
+			 * Cuando el valor de delta corresponda a una actualización o más se ejecutará el búcle
+			 * actualizando los elementos la cantidad de veces almacenadas.
+			 */
 			while(delta >= 1) {
 			
 				mover();
@@ -153,6 +185,7 @@ public class Volador extends Thread implements Disparable{
 				
 			}
 			
+			//Se duerme el hilo para aumentar la eficiencia y reducir el consumo de recursos.
 			try {
 			
 				sleep(0,(int) ((delta)*100000));
@@ -171,7 +204,11 @@ public class Volador extends Thread implements Disparable{
 	
 	@Override
 	public void disparado(){
-		
+		/*
+		 *Se comprobará que tipo de volador es y dependiendo de cual se realizará la acción
+		 *oportuna. Luego se pausará el hilo para que se imprima la imagen al ser disparado
+		 *el tiempo que está dormido y luego se le dará el estado de finalizado. 
+		 */
 		try {
 			
 			if(this instanceof Pajaro) {
@@ -200,11 +237,12 @@ public class Volador extends Thread implements Disparable{
 	@Override
 	public void comprobarAlcanzado() {
 		
-		if(JUGADOR.MIRILLA.getDisparo() != null) {
+		
+		if(JUGADOR.MIRILLA.getBala() != null) {
 			
-			if(JUGADOR.MIRILLA.getDisparo().getRangoColision() != null) {
+			if(JUGADOR.MIRILLA.getBala().getRangoColision() != null) {
 				
-				Shape colision = Shape.intersect(JUGADOR.MIRILLA.getDisparo().getRangoColision(),contornoColision);
+				Shape colision = Shape.intersect(JUGADOR.MIRILLA.getBala().getRangoColision(),contornoColision);
 				
 				if(colision.getLayoutBounds().getWidth() != -1 || colision.getLayoutBounds().getHeight() != -1) {
 					

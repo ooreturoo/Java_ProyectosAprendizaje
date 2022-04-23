@@ -20,6 +20,11 @@ public class ControladorJuego{
 	private final VentanaJuego VJ;
 	private final Juego JUEGO;
 	
+	
+	/**
+	 * Constructor que recibe una ventana.
+	 * @param stage Ventana de la aplicación
+	 */
 	public ControladorJuego(Stage stage) {
 		
 		VJ = new VentanaJuego(stage.getScene().getWidth(), stage.getScene().getHeight());

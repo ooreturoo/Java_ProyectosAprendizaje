@@ -2,23 +2,34 @@ package com.retur.modelo.juego.clases;
 
 import java.io.File;
 
-import com.retur.vista.VentanaJuego;
+
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+
+/**
+ * Clase que crea el fondo del juego.
+ * @author Sergio
+ *
+ */
 public class Fondo {
 
 	private final String DIR_IMAGEN;
 	private final Image IMAGEN;
 	
 	
-	public Fondo(VentanaJuego vj) {
+	/**
+	 * Crea una instancia de Fondo
+	 * @param anchoVentana Recibe el ancho de la ventana.
+	 * @param altoVentana Recibe el alto de la ventana.
+	 */
+	public Fondo(double anchoVentana, double altoVentana) {
 		
 		this.DIR_IMAGEN = "./src/resources/cielo.jpg";
 		this.IMAGEN = new Image(new File(DIR_IMAGEN).toURI().toString(),
-				vj.ANCHO_VENTANA,
-				vj.ALTO_VENTANA,
+				anchoVentana,
+				altoVentana,
 				false,
 				false);
 		

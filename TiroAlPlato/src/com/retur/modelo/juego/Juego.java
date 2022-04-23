@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 /**
  * Núcleo del juego, donde se ejecutarán todas las acciones que tengan que ver con este, como
  * el dibujo en el Canvas, el búcle principal y la creación de elementos disparables.
- * @author Sergio-Portatil
+ * @author Sergio
  *
  */
 public class Juego extends Thread{
@@ -43,8 +43,8 @@ public class Juego extends Thread{
 	
 	public Juego(VentanaJuego vj) {
 		
-		this.FONDO = new Fondo(vj);
-		this.JUGADOR = new Jugador(vj);
+		this.FONDO = new Fondo(vj.ANCHO_VENTANA, vj.ALTO_VENTANA);
+		this.JUGADOR = new Jugador(vj.ANCHO_VENTANA, vj.ALTO_VENTANA);
 		this.VOLADORES = new Volador[CAPACIDAD_VOLADORES];
 		this.VJ = vj;
 		this.GC = vj.CANVAS.getGraphicsContext2D();
@@ -126,9 +126,8 @@ public class Juego extends Thread{
 				
 			}
 			
-			/*
-			 * Se duerme el hilo para aumentar la eficiencia y reducir el consumo de recursos.
-			 */
+			//Se duerme el hilo para aumentar la eficiencia y reducir el consumo de recursos.
+			
 			try {
 				sleep(0,(int) ((delta)*100000));
 			} catch (InterruptedException e) {
@@ -140,7 +139,7 @@ public class Juego extends Thread{
 			if(System.currentTimeMillis() - tiempoMilis >= 1000) {
 				
 				//System.out.println("APS" + contadorAPS);
-				//System.out.println("FPS" + contadorFPS);
+				System.out.println("FPS" + contadorFPS);
 				tiempoMilis = System.currentTimeMillis();
 				contadorFPS = 0;
 				//contadorAPS = 0;
@@ -157,7 +156,7 @@ public class Juego extends Thread{
 	 */
 	private void actualizarElementos() {
 		
-		JUGADOR.MIRILLA.regargaDisparo();
+		JUGADOR.MIRILLA.recargaDisparo();
 		comprobacionFinalJuego();
 		//contadorAPS++;
 		

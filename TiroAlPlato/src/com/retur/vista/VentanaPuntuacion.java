@@ -3,18 +3,27 @@ package com.retur.vista;
 import com.retur.modelo.juego.clases.Jugador;
 
 import javafx.geometry.Pos;
-import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+/**
+ * Clase que representa una ventana que mostrará la puntuación al acabar el juego.
+ * @author Sergio
+ *
+ */
 public class VentanaPuntuacion extends VentanaMenu {
 
 	private static final String CLASE_RAIZ = "raiz_puntuacion" ;
 	
 	
+	/**
+	 * Crea una instancia de VentanaPuntuación
+	 * @param ancho Ancho para el tamaño de la escena
+	 * @param alto Alto para el tamaño de la escena
+	 */
 	public VentanaPuntuacion(double ancho, double alto) {
 		
 		super(ancho, alto);
@@ -60,6 +69,11 @@ public class VentanaPuntuacion extends VentanaMenu {
 	}
 
 
+	/**
+	 * Crea un Label donde se muestra la puntuación que obtuvo el jugador en el juego
+	 * y lo añade a la raiz para mostrarlo
+	 * @param jugador Recibe el jugador para obtener la puntuación obtenida.
+	 */
 	public void mostrarPuntuacion(Jugador jugador) {
 
 		Label puntuacion = new Label(jugador.getPuntos() + "");
@@ -67,7 +81,7 @@ public class VentanaPuntuacion extends VentanaMenu {
 		puntuacion.setPrefSize(ANCHO_VENTANA/3, 50);
 		puntuacion.setAlignment(Pos.CENTER);
 		puntuacion.getStyleClass().add("titulo_pnt");
-		puntuacion.setFont(Font.font("Elephant", FontWeight.BOLD, DIMENSION_FUENTE_TITULO));
+		puntuacion.setFont(Font.font("Arial", FontWeight.BOLD, DIMENSION_FUENTE_TITULO));
 		
 		AnchorPane.setTopAnchor(puntuacion, (ALTO_VENTANA/3) - (puntuacion.getPrefHeight()/2));
 		AnchorPane.setLeftAnchor(puntuacion, (ANCHO_VENTANA/2) - (puntuacion.getPrefWidth()/2));
