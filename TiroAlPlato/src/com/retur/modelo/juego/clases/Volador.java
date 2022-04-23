@@ -40,8 +40,8 @@ public class Volador extends Thread implements Disparable{
 	public Volador(int dimensionImagen, File imgVolador, double danyo, int puntos, Jugador jugador, VentanaJuego vj) {
 		
 		this.DIMENSION_IMAGEN = dimensionImagen;
-		this.ANCHO_VENTANA = vj.ANCHO_VENTANA_JUEGO;
-		this.ALTO_VENTANA = vj.ALTO_VENTANA_JUEGO;
+		this.ANCHO_VENTANA = vj.ANCHO_VENTANA;
+		this.ALTO_VENTANA = vj.ALTO_VENTANA;
 		this.IMAGEN_DISPARADO = new Image(new File("./src/resources/disparado.png").toURI().toString(),
 								DIMENSION_IMAGEN_ELIMINADO,
 								DIMENSION_IMAGEN_ELIMINADO,
@@ -93,7 +93,7 @@ public class Volador extends Thread implements Disparable{
 	}
 	
 	/**
-	 * Se encarga de pintar el objeto en el canvas y dependiendo del valor de disparado
+	 * Se encarga de pintar el objeto en el canvas y dependiendo del valor de 'disparado'
 	 * pintara una imagen u otra.
 	 * @param gc Recibe un GraphicsContext.
 	 */
@@ -174,18 +174,18 @@ public class Volador extends Thread implements Disparable{
 		
 		try {
 			
-			sleep(500);
 			if(this instanceof Pajaro) {
 				
-				System.out.println(JUGADOR.getVidas());
 				JUGADOR.reducirVidas(DANYO);
 				
 			}else {
 				
-				System.out.println(JUGADOR.getVidas());
 				JUGADOR.aumentarPuntos(PUNTOS);
 				
 			}
+			
+			sleep(500);
+			
 			recorridoFinalizado = true;
 			
 			
@@ -229,7 +229,7 @@ public class Volador extends Thread implements Disparable{
 			
 		}else {
 			
-			JUGADOR.setPuntos(JUGADOR.getPuntos() + PUNTOS);
+			JUGADOR.aumentarPuntos(PUNTOS);
 			
 		}
 		

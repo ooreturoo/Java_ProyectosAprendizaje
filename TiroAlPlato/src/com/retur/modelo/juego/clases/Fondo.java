@@ -17,8 +17,8 @@ public class Fondo {
 		
 		this.DIR_IMAGEN = "./src/resources/cielo.jpg";
 		this.IMAGEN = new Image(new File(DIR_IMAGEN).toURI().toString(),
-				vj.ANCHO_VENTANA_JUEGO,
-				vj.ALTO_VENTANA_JUEGO,
+				vj.ANCHO_VENTANA,
+				vj.ALTO_VENTANA,
 				false,
 				false);
 		

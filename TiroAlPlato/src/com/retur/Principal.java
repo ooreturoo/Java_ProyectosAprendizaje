@@ -1,13 +1,15 @@
 package com.retur;
 	
-import java.io.File;
 
-import com.retur.controlador.ControladorMenuInicial;
+import com.retur.controlador.ControladorPrincipal;
+import com.retur.controlador.ControladorPuntuacion;
+import com.retur.modelo.juego.clases.Jugador;
+import com.retur.vista.VentanaJuego;
 
 import javafx.application.Application;
-import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 
 public class Principal extends Application {
@@ -16,14 +18,23 @@ public class Principal extends Application {
 	@Override
 	public void start(Stage stage) {
 		try {
-			
-			AnchorPane anchor = new AnchorPane();
-			Scene scene = new Scene(anchor);
-			scene.getStylesheets().add(new File("src/resources/application.css").toURI().toString());
-			stage.setScene(scene);
+		
+			/*
+			 * Se le asigna un primera escena vacía para poder luego obtener las medidas que se le asignan a las escenas
+			 * por defecto a partir del tamaño del stage.
+			 */
+			stage.setScene(new Scene(new AnchorPane()));
+			//Se maximiza la ventana.
 			stage.setMaximized(true);
 			stage.show();
-			new ControladorMenuInicial(stage);
+			
+			//Se crea un objeto del controlador de la ventana principal y se muestra en el stage.
+			new ControladorPrincipal(stage).mostrarVentanaPrincipal(stage);
+			
+			//TODO Para comprobar la ventana de puntuacion.
+			//ControladorPuntuacion controlador = new ControladorPuntuacion(stage);
+			//controlador.mostrarPuntuacion(new Jugador(new VentanaJuego(stage.getScene().getWidth(), stage.getScene().getHeight())));
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

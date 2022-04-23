@@ -33,8 +33,8 @@ public class Mirilla {
 	
 	public Mirilla(VentanaJuego vj) {
 		
-		ANCHO_VENTANA = vj.ANCHO_VENTANA_JUEGO;
-		ALTO_VENTANA = vj.ALTO_VENTANA_JUEGO;
+		ANCHO_VENTANA = vj.ANCHO_VENTANA;
+		ALTO_VENTANA = vj.ALTO_VENTANA;
 		ultimoDisparo = System.currentTimeMillis();
 		
 	}

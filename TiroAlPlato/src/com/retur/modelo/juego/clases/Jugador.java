@@ -41,7 +41,7 @@ public class Jugador{
 	
 	public void aumentarPuntos(int puntos) {
 		
-		puntos += puntos;
+		this.puntos += puntos;
 		
 	}
 	
