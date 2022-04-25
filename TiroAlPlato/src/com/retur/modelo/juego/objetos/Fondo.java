@@ -2,7 +2,7 @@ package com.retur.modelo.juego.objetos;
 
 import java.io.File;
 
-
+import com.retur.modelo.juego.interfaces.Pintable;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -13,7 +13,7 @@ import javafx.scene.image.Image;
  * @author Sergio
  *
  */
-public class Fondo {
+public class Fondo implements Pintable{
 
 	private final String DIR_IMAGEN;
 	private final Image IMAGEN;
@@ -35,10 +35,13 @@ public class Fondo {
 		
 	}
 	
+	@Override
 	public void pintar(GraphicsContext gc) {
 		
 		gc.drawImage(IMAGEN, 0, 0);
 		
 	}
+
+
 	
 }

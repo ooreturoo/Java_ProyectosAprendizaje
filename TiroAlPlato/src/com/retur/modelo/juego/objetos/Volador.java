@@ -5,6 +5,7 @@ import java.io.File;
 
 import com.retur.modelo.juego.Juego;
 import com.retur.modelo.juego.interfaces.Disparable;
+import com.retur.modelo.juego.interfaces.Pintable;
 import com.retur.vista.VentanaJuego;
 
 import javafx.scene.canvas.GraphicsContext;
@@ -18,7 +19,7 @@ import javafx.scene.shape.Shape;
  * @author Sergio
  *
  */
-public abstract class Volador extends Thread implements Disparable{
+public abstract class Volador extends Thread implements Disparable, Pintable{
 
 	private static final int VELOCIDAD_DEFECTO = 3;
 	private static final int DIMENSION_IMAGEN_DISPARADO = 70;
@@ -115,6 +116,7 @@ public abstract class Volador extends Thread implements Disparable{
 	 * pintara una imagen u otra.
 	 * @param gc 
 	 */
+	@Override
 	public void pintar(GraphicsContext gc) {
 		
 		if(!recorridoFinalizado) {

@@ -1,0 +1,13 @@
+
+
+.menuArchivo > .arrow-button{
+	
+	-fx-padding: 0;
+	
+}
+
+.menuArchivo > .arrow-button > .arrow {
+	
+	-fx-padding: 0;
+	
+}

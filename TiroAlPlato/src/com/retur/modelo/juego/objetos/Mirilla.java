@@ -2,7 +2,7 @@ package com.retur.modelo.juego.objetos;
 
 import java.io.File;
 
-
+import com.retur.modelo.juego.interfaces.Pintable;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -14,7 +14,7 @@ import javafx.scene.media.AudioClip;
  * @author Sergio
  *
  */
-public class Mirilla {
+public class Mirilla implements Pintable {
 
 	private static final int DIMENSION_IMAGEN = 30;
 	private static final int TIEMPO_RECARGA_MILIS = 100;
@@ -114,6 +114,7 @@ public class Mirilla {
 	 * Pinta la mirilla en la posición en la que se encuentre.
 	 * @param gc 
 	 */
+	@Override
 	public void pintar(GraphicsContext gc) {
 		
 		//Pinta el rango de colisión de la bala.

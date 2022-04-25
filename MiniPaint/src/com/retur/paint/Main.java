@@ -11,13 +11,16 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			
 			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("/com/retur/paint/vista/VistaPaint.fxml"));
-			Scene scene = new Scene(root,400,400);
-			scene.getStylesheets().add(getClass().getResource("/resources/application.css").toExternalForm());
+			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			
 		} catch(Exception e) {
+			
 			e.printStackTrace();
+			
 		}
 	}
 	

@@ -121,7 +121,7 @@ public class Juego extends Thread{
 			 */
 			while(renderizado >= 1) {
 				
-				pintar();
+				pintarTodo();
 				renderizado--;
 				
 			}
@@ -204,7 +204,7 @@ public class Juego extends Thread{
 	/**
 	 * Método encargado de pintar en el Canvas.
 	 */
-	private void pintar() {
+	private void pintarTodo() {
 		
 		FONDO.pintar(GC);
 		
