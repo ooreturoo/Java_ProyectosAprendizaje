@@ -2,7 +2,7 @@ package com.retur.controlador;
 
 
 
-import com.retur.modelo.juego.clases.Jugador;
+import com.retur.modelo.juego.objetos.Jugador;
 import com.retur.vista.VentanaPuntuacion;
 
 import javafx.event.ActionEvent;

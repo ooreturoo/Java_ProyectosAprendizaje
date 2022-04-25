@@ -2,7 +2,7 @@ package com.retur.controlador;
 
 
 import com.retur.modelo.juego.Juego;
-import com.retur.modelo.juego.clases.Jugador;
+import com.retur.modelo.juego.objetos.Jugador;
 import com.retur.vista.VentanaJuego;
 
 

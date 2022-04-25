@@ -1,6 +1,6 @@
 package com.retur.vista;
 
-import com.retur.modelo.juego.clases.Jugador;
+import com.retur.modelo.juego.objetos.Jugador;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;

@@ -2,11 +2,11 @@ package com.retur.modelo.juego;
 
 
 import com.retur.controlador.ControladorPuntuacion;
-import com.retur.modelo.juego.clases.Fondo;
-import com.retur.modelo.juego.clases.Jugador;
-import com.retur.modelo.juego.clases.Pajaro;
-import com.retur.modelo.juego.clases.Plato;
-import com.retur.modelo.juego.clases.Volador;
+import com.retur.modelo.juego.objetos.Fondo;
+import com.retur.modelo.juego.objetos.Jugador;
+import com.retur.modelo.juego.objetos.Pajaro;
+import com.retur.modelo.juego.objetos.Plato;
+import com.retur.modelo.juego.objetos.Volador;
 import com.retur.vista.VentanaJuego;
 
 import javafx.application.Platform;
