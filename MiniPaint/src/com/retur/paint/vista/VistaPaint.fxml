@@ -34,8 +34,8 @@
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="289.0" minWidth="10.0" prefWidth="252.0" />
                               <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="85.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="825.0" minWidth="10.0" prefWidth="176.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="231.0" minWidth="10.0" prefWidth="137.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="825.0" minWidth="10.0" prefWidth="129.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="65.0" />
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="300.0" />
                               <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" />
@@ -125,112 +125,112 @@
                                     <Label text="Colores" GridPane.columnSpan="10" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM" />
                                     <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="22.0" prefWidth="22.0">
                                        <graphic>
-                                          <Canvas height="22.0" width="22.0" />
+                                          <Canvas fx:id="colorPre0" height="22.0" width="22.0" />
                                        </graphic>
                                     </Button>
                                     <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="22.0" prefWidth="22.0" GridPane.columnIndex="1">
                                        <graphic>
-                                          <Canvas height="22.0" width="22.0" />
+                                          <Canvas fx:id="colorPre1" height="22.0" width="22.0" />
                                        </graphic>
                                     </Button>
                                     <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="22.0" prefWidth="22.0" GridPane.columnIndex="2">
                                        <graphic>
-                                          <Canvas height="22.0" width="22.0" />
+                                          <Canvas fx:id="colorPre2" height="22.0" width="22.0" />
                                        </graphic>
                                     </Button>
                                     <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="22.0" prefWidth="22.0" GridPane.columnIndex="3">
                                        <graphic>
-                                          <Canvas height="22.0" width="22.0" />
+                                          <Canvas fx:id="colorPre3" height="22.0" width="22.0" />
                                        </graphic>
                                     </Button>
                                     <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="22.0" prefWidth="22.0" GridPane.columnIndex="4">
                                        <graphic>
-                                          <Canvas height="22.0" width="22.0" />
+                                          <Canvas fx:id="colorPre4" height="22.0" width="22.0" />
                                        </graphic>
                                     </Button>
                                     <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="22.0" prefWidth="22.0" GridPane.columnIndex="5">
                                        <graphic>
-                                          <Canvas height="22.0" width="22.0" />
+                                          <Canvas fx:id="colorPre5" height="22.0" width="22.0" />
                                        </graphic>
                                     </Button>
                                     <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="22.0" prefWidth="22.0" GridPane.columnIndex="6">
                                        <graphic>
-                                          <Canvas height="22.0" width="22.0" />
+                                          <Canvas fx:id="colorPre6" height="22.0" width="22.0" />
                                        </graphic>
                                     </Button>
                                     <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="22.0" prefWidth="22.0" GridPane.columnIndex="7">
                                        <graphic>
-                                          <Canvas height="22.0" width="22.0" />
+                                          <Canvas fx:id="colorPre7" height="22.0" width="22.0" />
                                        </graphic>
                                     </Button>
                                     <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="22.0" prefWidth="22.0" GridPane.columnIndex="8">
                                        <graphic>
-                                          <Canvas height="22.0" width="22.0" />
+                                          <Canvas fx:id="colorPre8" height="22.0" width="22.0" />
                                        </graphic>
                                     </Button>
                                     <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="22.0" prefWidth="22.0" GridPane.columnIndex="9">
                                        <graphic>
-                                          <Canvas height="22.0" width="22.0" />
+                                          <Canvas fx:id="colorPre9" height="22.0" width="22.0" />
                                        </graphic>
                                     </Button>
                                     <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="22.0" prefWidth="22.0" GridPane.columnIndex="10">
                                        <graphic>
-                                          <Canvas height="22.0" width="22.0" />
+                                          <Canvas fx:id="colorPre10" height="22.0" width="22.0" />
                                        </graphic>
                                     </Button>
                                     <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="22.0" prefWidth="22.0" GridPane.rowIndex="1">
                                        <graphic>
-                                          <Canvas height="22.0" width="22.0" />
+                                          <Canvas fx:id="colorPre11" height="22.0" width="22.0" />
                                        </graphic>
                                     </Button>
                                     <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="22.0" prefWidth="22.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                        <graphic>
-                                          <Canvas height="22.0" width="22.0" />
+                                          <Canvas fx:id="colorPre12" height="22.0" width="22.0" />
                                        </graphic>
                                     </Button>
                                     <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="22.0" prefWidth="22.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                        <graphic>
-                                          <Canvas height="22.0" width="22.0" />
+                                          <Canvas fx:id="colorPre13" height="22.0" width="22.0" />
                                        </graphic>
                                     </Button>
                                     <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="22.0" prefWidth="22.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                        <graphic>
-                                          <Canvas height="22.0" width="22.0" />
+                                          <Canvas fx:id="colorPre14" height="22.0" width="22.0" />
                                        </graphic>
                                     </Button>
                                     <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="22.0" prefWidth="22.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
                                        <graphic>
-                                          <Canvas height="22.0" width="22.0" />
+                                          <Canvas fx:id="colorPre15" height="22.0" width="22.0" />
                                        </graphic>
                                     </Button>
                                     <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="22.0" prefWidth="22.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
                                        <graphic>
-                                          <Canvas height="22.0" width="22.0" />
+                                          <Canvas fx:id="colorPre16" height="22.0" width="22.0" />
                                        </graphic>
                                     </Button>
                                     <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="22.0" prefWidth="22.0" GridPane.columnIndex="6" GridPane.rowIndex="1">
                                        <graphic>
-                                          <Canvas height="22.0" width="22.0" />
+                                          <Canvas fx:id="colorPre17" height="22.0" width="22.0" />
                                        </graphic>
                                     </Button>
                                     <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="22.0" prefWidth="22.0" GridPane.columnIndex="7" GridPane.rowIndex="1">
                                        <graphic>
-                                          <Canvas height="22.0" width="22.0" />
+                                          <Canvas fx:id="colorPre18" height="22.0" width="22.0" />
                                        </graphic>
                                     </Button>
                                     <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="22.0" prefWidth="22.0" GridPane.columnIndex="8" GridPane.rowIndex="1">
                                        <graphic>
-                                          <Canvas height="22.0" width="22.0" />
+                                          <Canvas fx:id="colorPre19" height="22.0" width="22.0" />
                                        </graphic>
                                     </Button>
                                     <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="22.0" prefWidth="22.0" GridPane.columnIndex="9" GridPane.rowIndex="1">
                                        <graphic>
-                                          <Canvas height="22.0" width="22.0" />
+                                          <Canvas fx:id="colorPre20" height="22.0" width="22.0" />
                                        </graphic>
                                     </Button>
                                     <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="22.0" prefWidth="22.0" GridPane.columnIndex="10" GridPane.rowIndex="1">
                                        <graphic>
-                                          <Canvas height="22.0" width="22.0" />
+                                          <Canvas fx:id="colorPre21" height="22.0" width="22.0" />
                                        </graphic>
                                     </Button>
                                     <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="22.0" prefWidth="22.0" GridPane.rowIndex="2">
@@ -299,7 +299,7 @@
                                     <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="45.0" text="Color 1" textAlignment="CENTER" wrapText="true" GridPane.valignment="TOP">
+                                    <Button fx:id="botonColor1" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="45.0" text="Color 1" textAlignment="CENTER" wrapText="true" GridPane.valignment="TOP">
                                        <graphic>
                                           <Canvas height="35.0" width="35.0" />
                                        </graphic>
@@ -310,7 +310,7 @@
                                           <Insets top="2.0" />
                                        </GridPane.margin>
                                     </Button>
-                                    <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="45.0" text="Color 2" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                                    <Button fx:id="botonColor2" alignment="BOTTOM_CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="45.0" text="Color 2" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.valignment="TOP">
                                        <graphic>
                                           <Canvas height="35.0" width="35.0" />
                                        </graphic>
@@ -341,12 +341,23 @@
                                     <Insets bottom="2.0" />
                                  </padding>
                               </Button>
-                              <MenuButton contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="45.0" text="MenuButton" wrapText="true" GridPane.columnIndex="3" GridPane.valignment="TOP">
+                              <MenuButton alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="45.0" prefWidth="70.0" rotate="90.0" wrapText="true" GridPane.columnIndex="3" GridPane.valignment="TOP">
                                 <items>
                                   <MenuItem mnemonicParsing="false" text="Action 1" />
                                   <MenuItem mnemonicParsing="false" text="Action 2" />
                                 </items>
+                                 <GridPane.margin>
+                                    <Insets top="15.0" />
+                                 </GridPane.margin>
+                                 <graphic>
+                                    <ImageView fitHeight="49.0" fitWidth="35.0" pickOnBounds="true" rotate="-90.0">
+                                       <image>
+                                          <Image url="@../../../../resources/images/tamaño.jpg" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
                               </MenuButton>
+                              <Label text="Tamaño" GridPane.columnIndex="3" />
                            </children>
                         </GridPane>
                      </children>
@@ -361,7 +372,7 @@
         </tabs>
       </TabPane>
       <Button layoutY="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="24.0" prefWidth="56.0" text="Archivo" />
-      <ScrollPane fx:id="zonaLienzo" layoutY="122.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1080.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="122.0" />
+      <ScrollPane fx:id="zonaLienzo" layoutY="120.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1080.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0" />
       <MenuButton layoutY="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="24.0" prefWidth="56.0" styleClass="menuArchivo" text="Archivo">
         <items>
           <MenuItem fx:id="nuevoLienzo" mnemonicParsing="false" onAction="#crearLienzo" text="Nuevo" />

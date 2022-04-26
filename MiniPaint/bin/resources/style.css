@@ -6,8 +6,23 @@
 	
 }
 
-.menuArchivo > .arrow-button > .arrow {
+.menuArchivo > .arrow-button > .arrow, .medidasPintura > .arrow-button {
 	
 	-fx-padding: 0;
 	
 }
+
+
+.medidasPintura > .arrow-button > .arrow{
+	
+	-fx-padding: 0;
+
+	
+}
+
+
+/* .medidasPintura > .arrow-button > .arrow { */
+	
+/* 	-fx-padding: 0; */
+	
+/* } */
