@@ -1,4 +1,4 @@
-package com.retur.paint.modelo.objetos;
+package com.retur.paint.modelo.elementos.pintura;
 
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;

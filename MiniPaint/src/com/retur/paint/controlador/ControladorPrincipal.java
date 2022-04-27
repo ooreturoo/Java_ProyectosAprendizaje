@@ -6,15 +6,19 @@ package com.retur.paint.controlador;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.retur.paint.modelo.objetos.ColorSeleccionado;
-import com.retur.paint.modelo.objetos.Lienzo;
+import com.retur.paint.modelo.elementos.pintura.ColorSeleccionado;
+import com.retur.paint.modelo.elementos.pintura.Lienzo;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.GridPane;
 
 public class ControladorPrincipal implements Initializable {
 	
@@ -24,49 +28,7 @@ public class ControladorPrincipal implements Initializable {
 	 *************************/
 	
 	@FXML
-	private Button colorPre0;
-	@FXML
-	private Button colorPre1;
-	@FXML
-	private Button colorPre2;
-	@FXML
-	private Button colorPre3;
-	@FXML
-	private Button colorPre4;
-	@FXML
-	private Button colorPre5;
-	@FXML
-	private Button colorPre6;
-	@FXML
-	private Button colorPre7;
-	@FXML
-	private Button colorPre8;
-	@FXML
-	private Button colorPre9;
-	@FXML
-	private Button colorPre10;
-	@FXML
-	private Button colorPre11;
-	@FXML
-	private Button colorPre12;
-	@FXML
-	private Button colorPre13;
-	@FXML
-	private Button colorPre14;
-	@FXML
-	private Button colorPre15;
-	@FXML
-	private Button colorPre16;
-	@FXML
-	private Button colorPre17;
-	@FXML
-	private Button colorPre18;
-	@FXML
-	private Button colorPre19;
-	@FXML
-	private Button colorPre20;
-	@FXML
-	private Button colorPre21;
+	private GridPane gridBotonesColores;
 	
 	
 	@FXML
@@ -81,21 +43,56 @@ public class ControladorPrincipal implements Initializable {
 	@FXML
 	private ScrollPane zonaLienzo;
 	
+	private ObservableList<Button> coloresPredeterminados;
+	private ObservableList<Button> coloresAjustables;
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
-
+		/*
+		 * Obtenemos los hijos del grid donde se alamcenan los colores que servirán para cambiar
+		 * el color con el que se dibuja, se recorren y se separan los que serán colores por defectos
+		 * y en los que se cambiarán los valores.
+		 */
+		
+		for(Node nodo : gridBotonesColores.getChildren()) {
+			
+			if(nodo instanceof Button) {
+				
+				Button boton = (Button) nodo;
+				
+				if(boton.getText().isEmpty()) {
+					
+					coloresAjustables.add(boton);
+					
+				}else {
+					
+					coloresPredeterminados.add(boton);
+					
+				}
+				
+			}
+			
+			
+		}
+		
+		
+		
+		
+		
 		
 		
 	};
 	
+	
 	@FXML
 	private void crearLienzo(ActionEvent e) {
 		
-
 		
 		
-	}
+	};
+	
+	
 
 	
 	

@@ -1,8 +1,8 @@
 package com.retur.paint.controlador;
 
+import com.retur.paint.modelo.elementos.pintura.ColorSeleccionado;
 import com.retur.paint.modelo.excepciones.ColorException;
 import com.retur.paint.modelo.excepciones.mensajes.MensajesExcepciones;
-import com.retur.paint.modelo.objetos.ColorSeleccionado;
 
 public class ControladorPintar {
 
@@ -16,8 +16,8 @@ public class ControladorPintar {
 	
 	public ControladorPintar() {
 		
-		this.color1 = new ColorSeleccionado(COLOR1_DEFECTO);
-		this.color2 = new ColorSeleccionado(COLOR2_DEFECTO);
+		//this.color1 = new ColorSeleccionado(,COLOR1_DEFECTO);
+		//this.color2 = new ColorSeleccionado(COLOR2_DEFECTO);
 		
 	}
 	
