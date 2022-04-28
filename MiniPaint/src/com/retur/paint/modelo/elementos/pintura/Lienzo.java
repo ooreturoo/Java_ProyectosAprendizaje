@@ -4,6 +4,7 @@ import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -11,7 +12,7 @@ import javafx.scene.paint.Color;
 public class Lienzo {
 
 	private final AnchorPane ANCHOR_LIENZO;
-	private final Canvas CANVAS_LIENZO;
+	public final Canvas CANVAS_LIENZO;
 	private final String[][] dimensionLienzo;
 	
 	
@@ -24,12 +25,22 @@ public class Lienzo {
 		CANVAS_LIENZO = new Canvas(ancho,alto);
 		
 		ANCHOR_LIENZO.getChildren().add(CANVAS_LIENZO);
+		//Alomejor hay que añadir el evento en el controlador, donde poder obtener los colores
+		// y comprobar que el click se ha hecho encima del Canvas del lienzo.
 		CANVAS_LIENZO.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent e) {
 				
-				rellenarColorPixel((int)e.getX(),(int) e.getY(), "#FF5733");
+				if(e.getButton() == MouseButton.PRIMARY) {
+					//TODO Añadir una forma de obtener el color seleccionado.
+					rellenarColorPixel((int)e.getX(),(int) e.getY(), "Primercolor");
+					
+				}else if(e.getButton() == MouseButton.SECONDARY){
+					
+					rellenarColorPixel((int)e.getX(),(int) e.getY(), "SegundoColor");
+					
+				}
 				
 				
 			}

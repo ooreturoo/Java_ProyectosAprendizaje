@@ -6,8 +6,6 @@ package com.retur.paint.controlador;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.retur.paint.modelo.elementos.pintura.ColorSeleccionado;
-import com.retur.paint.modelo.elementos.pintura.Lienzo;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -43,12 +41,14 @@ public class ControladorPrincipal implements Initializable {
 	@FXML
 	private ScrollPane zonaLienzo;
 	
-	private ObservableList<Button> coloresPredeterminados;
-	private ObservableList<Button> coloresAjustables;
+	private ObservableList<Button> botonesTodosColores;
+	private ObservableList<Button> botonesColoresAjustables;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
+		botonesTodosColores = FXCollections.observableArrayList();
+		botonesColoresAjustables = FXCollections.observableArrayList();
 		/*
 		 * Obtenemos los hijos del grid donde se alamcenan los colores que servirán para cambiar
 		 * el color con el que se dibuja, se recorren y se separan los que serán colores por defectos
@@ -61,13 +61,11 @@ public class ControladorPrincipal implements Initializable {
 				
 				Button boton = (Button) nodo;
 				
+				botonesTodosColores.add(boton);
+				
 				if(boton.getText().isEmpty()) {
 					
-					coloresAjustables.add(boton);
-					
-				}else {
-					
-					coloresPredeterminados.add(boton);
+					botonesColoresAjustables.add(boton);
 					
 				}
 				
@@ -75,11 +73,6 @@ public class ControladorPrincipal implements Initializable {
 			
 			
 		}
-		
-		
-		
-		
-		
 		
 		
 	};
@@ -91,6 +84,36 @@ public class ControladorPrincipal implements Initializable {
 		
 		
 	};
+	
+	@FXML
+	private void obtenerColorBoton(ActionEvent e) {
+		
+		Object obj = e.getSource();
+		
+		if(obj instanceof Button) {
+			
+			Button botonActivado = (Button) obj;
+			boolean encontrado = false;
+			
+			for(int i = 0; i < botonesTodosColores.size() && !encontrado; i++) {
+				
+				Button boton = botonesTodosColores.get(i);
+				
+				if(botonActivado.equals(boton) && !boton.getText().isEmpty()) {
+					
+					//TODO Añadir el método cambio de color de controlador pintar.
+					
+					encontrado = true;
+					
+				}
+				
+			}
+			
+			
+		}
+		
+		
+	}
 	
 	
 

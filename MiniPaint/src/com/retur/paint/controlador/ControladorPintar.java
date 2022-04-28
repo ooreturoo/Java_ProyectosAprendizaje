@@ -1,8 +1,10 @@
 package com.retur.paint.controlador;
 
+
 import com.retur.paint.modelo.elementos.pintura.ColorSeleccionado;
-import com.retur.paint.modelo.excepciones.ColorException;
-import com.retur.paint.modelo.excepciones.mensajes.MensajesExcepciones;
+import com.retur.paint.modelo.elementos.pintura.Lienzo;
+
+import javafx.scene.control.Button;
 
 public class ControladorPintar {
 
@@ -10,38 +12,40 @@ public class ControladorPintar {
 	private static final String COLOR1_DEFECTO = "#FFFFFF";
 	private static final String COLOR2_DEFECTO = "#000000";
 	
-	private ColorSeleccionado color1;
-	private ColorSeleccionado color2;
+	public final ColorSeleccionado COLOR1;
+	public final ColorSeleccionado COLOR2;
+	private Lienzo lienzo;
 
 	
-	public ControladorPintar() {
+	public ControladorPintar(Button color1, Button color2) {
 		
-		//this.color1 = new ColorSeleccionado(,COLOR1_DEFECTO);
-		//this.color2 = new ColorSeleccionado(COLOR2_DEFECTO);
+		COLOR1 = new ColorSeleccionado(color1, COLOR1_DEFECTO);
+		COLOR2 = new ColorSeleccionado(color2, COLOR2_DEFECTO);
 		
 	}
 	
-	public String seleccionColor() throws ColorException {
+	public void cambioColor(String color) {
 		
-		String colorSeleccionado;
-		
-		if(color1.isSeleccionado()) {
+		if(COLOR1.isSeleccionado()) {
 			
-			colorSeleccionado = color1.getColor();
+			COLOR1.setColor(color);
 			
-		}else if(color2.isSeleccionado()) {
+		}else if(COLOR2.isSeleccionado()) {
 			
-			colorSeleccionado = color2.getColor();
-			
-		}else {
-			
-			throw new ColorException(MensajesExcepciones.COLOR_NO_SELECCIONADO);
+			COLOR2.setColor(color);
 			
 		}
 		
-		return colorSeleccionado;
-		
 	}
+
+	public Lienzo getLienzo() {
+		return lienzo;
+	}
+
+	public void setLienzo(Lienzo lienzo) {
+		this.lienzo = lienzo;
+	}
+	
 	
 	
 }
