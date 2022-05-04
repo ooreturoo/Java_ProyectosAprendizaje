@@ -80,4 +80,16 @@ public class Goma extends HerramientaDibujo {
 		
 	}
 
+	@Override
+	public void seleccionado() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deseleccionado() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

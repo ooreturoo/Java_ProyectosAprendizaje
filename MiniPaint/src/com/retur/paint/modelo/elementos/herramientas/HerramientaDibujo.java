@@ -2,20 +2,19 @@ package com.retur.paint.modelo.elementos.herramientas;
 
 
 
-import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
 
-public abstract class HerramientaDibujo {
+public abstract class HerramientaDibujo extends Herramienta {
 	
 	protected static final int DIMENSION_CURSOR = 25;
 
-	public final Cursor ESTILO_CURSOR;
+	
 	private String color;
 	private boolean[][] rangoDibujo;
 	
 	public HerramientaDibujo(ImageCursor estiloCursor) {
 		
-		ESTILO_CURSOR = estiloCursor;
+		super(estiloCursor);
 		
 	}
 	

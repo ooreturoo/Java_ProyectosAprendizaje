@@ -9,6 +9,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -60,7 +61,7 @@
                                     <RowConstraints prefHeight="25.0" valignment="CENTER" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" GridPane.columnIndex="1">
+                                    <Button fx:id="lapiz" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" GridPane.columnIndex="1">
                                        <graphic>
                                           <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -79,7 +80,7 @@
                                           <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true" />
                                        </graphic>
                                     </Button>
-                                    <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <Button fx:id="goma" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                        <graphic>
                                           <ImageView fitHeight="23.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -375,12 +376,17 @@
         </tabs>
       </TabPane>
       <Button layoutY="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="24.0" prefWidth="56.0" text="Archivo" />
-      <ScrollPane fx:id="zonaLienzo" layoutY="120.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1080.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0" />
+      <ScrollPane fx:id="zonaLienzo" focusTraversable="false" layoutY="120.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="1080.0" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0" />
       <MenuButton layoutY="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="24.0" prefWidth="56.0" styleClass="menuArchivo" text="Archivo">
         <items>
           <MenuItem fx:id="nuevoLienzo" mnemonicParsing="false" onAction="#crearLienzo" text="Nuevo" />
           <MenuItem mnemonicParsing="false" text="Action 2" />
         </items>
       </MenuButton>
+      <ToolBar layoutX="-1.0" layoutY="686.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="1080.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <items>
+            <Label fx:id="coordenadaLienzo" prefHeight="25.0" prefWidth="116.0" />
+         </items>
+      </ToolBar>
    </children>
 </AnchorPane>

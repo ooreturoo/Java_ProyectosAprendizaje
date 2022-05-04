@@ -85,6 +85,20 @@ public class Lapiz extends HerramientaDibujo {
 		return rango;
 		
 	}
+
+	@Override
+	public void seleccionado() {
+		
+		super.botonHerramienta.getStyleClass().add(CLASE_SELECCIONADO);
+		
+		
+	}
+	
+	@Override
+	public void deseleccionado() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 

@@ -1,8 +1,10 @@
 package com.retur.paint.modelo.elementos.pintura;
 
+import com.retur.paint.modelo.elementos.interfaces.Seleccionable;
+
 import javafx.scene.control.Button;
 
-public class ColorSeleccionado {
+public class ColorSeleccionado implements Seleccionable{
 
 	
 	private Button botonColorSeleccionado;
@@ -28,14 +30,17 @@ public class ColorSeleccionado {
 		return seleccionado;
 	}
 
-	public void seleccionar() {
+	
+	@Override
+	public void seleccionado() {
 		
 		seleccionado = true;
-		botonColorSeleccionado.getStyleClass().add("botonColorSeleccionado");
+		botonColorSeleccionado.getStyleClass().add(CLASE_SELECCIONADO);
 		
 	}
-	
-	public void deseleccionar() {
+
+	@Override
+	public void deseleccionado() {
 		
 		seleccionado = false;
 		botonColorSeleccionado.getStyleClass().add("botonColor");

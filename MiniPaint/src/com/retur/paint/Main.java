@@ -14,6 +14,8 @@ public class Main extends Application {
 			
 			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("/com/retur/paint/vista/VistaPaint.fxml"));
 			Scene scene = new Scene(root);
+			scene.onMouseDraggedProperty().set(null);
+
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			
