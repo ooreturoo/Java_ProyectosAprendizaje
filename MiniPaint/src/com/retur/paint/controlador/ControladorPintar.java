@@ -68,6 +68,12 @@ public class ControladorPintar {
 		
 	}
 	
+	private void actualizarMuestreoColorSelec() {
+		
+		
+		
+	}
+	
 	/**
 	 * Cambia la herramienta seleccionada que se utilizara en el lienzo.
 	 * @param herramienta Recibe la herramienta que se va a utilizar.
@@ -123,13 +129,19 @@ public class ControladorPintar {
 			public void handle(MouseEvent e) {
 			
 				//TODO Aqui el while no funciona, porque no para al detectar el siguiene elemento el siguiente elemento.
-				while(pintando) {
+				//while(pintando) {
+					double xRaton = e.getX();
+					double yRaton = e.getY();
+				if(xRaton >= 0 && xRaton < lienzo.ANCHO_LIENZO && yRaton >= 0 && yRaton < lienzo.ALTO_LIENZO) {
 					
-					lista.add("X: " + e.getX() + " Y: " + e.getY());
+					lista.add("X: " + xRaton + " Y: " + yRaton);
 					lienzo.rellenarColorPixel((int)e.getX(),(int) e.getY(), COLOR1_DEFECTO);
-
 					
 				}
+					
+
+					
+				//}
 
 			}
 		});

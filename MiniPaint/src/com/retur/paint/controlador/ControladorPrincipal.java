@@ -119,8 +119,7 @@ public class ControladorPrincipal implements Initializable {
 			cPintar.cambioColor(boton.getText());
 			
 		}
-		
-		
+	
 	}
 	
 	/**

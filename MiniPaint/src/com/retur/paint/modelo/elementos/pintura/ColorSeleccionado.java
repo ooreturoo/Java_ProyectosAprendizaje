@@ -2,18 +2,21 @@ package com.retur.paint.modelo.elementos.pintura;
 
 import com.retur.paint.modelo.elementos.interfaces.Seleccionable;
 
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 
 public class ColorSeleccionado implements Seleccionable{
 
 	
-	private Button botonColorSeleccionado;
+	private final Button BOTON_COLOR_SELEC;
+	public final Canvas MUESTREO_COLOR;
 	private String color;
 	private boolean seleccionado;
 	
 	public ColorSeleccionado(Button botonColorSeleccionado,String color) {
 		
-		this.botonColorSeleccionado = botonColorSeleccionado;
+		this.BOTON_COLOR_SELEC = botonColorSeleccionado;
+		this.MUESTREO_COLOR = (Canvas) botonColorSeleccionado.getGraphic();
 		this.color = color;
 		
 	}
@@ -35,7 +38,7 @@ public class ColorSeleccionado implements Seleccionable{
 	public void seleccionado() {
 		
 		seleccionado = true;
-		botonColorSeleccionado.getStyleClass().add(CLASE_SELECCIONADO);
+		BOTON_COLOR_SELEC.getStyleClass().add(CLASE_SELECCIONADO);
 		
 	}
 
@@ -43,7 +46,7 @@ public class ColorSeleccionado implements Seleccionable{
 	public void deseleccionado() {
 		
 		seleccionado = false;
-		botonColorSeleccionado.getStyleClass().add("botonColor");
+		BOTON_COLOR_SELEC.getStyleClass().add("botonColor");
 		
 	}
 	

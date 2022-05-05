@@ -14,6 +14,8 @@ public class Lienzo {
 
 	private final AnchorPane ANCHOR_LIENZO;
 	public final Canvas CANVAS_LIENZO;
+	public final int ALTO_LIENZO;
+	public final int ANCHO_LIENZO;
 	private final String[][] dimensionLienzo;
 	private int posRatonX;
 	private int posRatonY;
@@ -30,7 +32,9 @@ public class Lienzo {
 		
 		ANCHOR_LIENZO.getChildren().add(CANVAS_LIENZO);
 		zonaLienzo.setContent(ANCHOR_LIENZO);
-		dimensionLienzo = new String[alto][ancho];
+		ALTO_LIENZO = alto;
+		ANCHO_LIENZO = ancho;
+		dimensionLienzo = new String[ALTO_LIENZO][ANCHO_LIENZO];
 		
 	}
 	
