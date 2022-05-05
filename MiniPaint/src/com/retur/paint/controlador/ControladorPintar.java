@@ -1,18 +1,17 @@
 package com.retur.paint.controlador;
 
 
-import java.util.ArrayList;
 
 import com.retur.paint.modelo.elementos.herramientas.Herramienta;
+import com.retur.paint.modelo.elementos.herramientas.HerramientaDibujo;
 import com.retur.paint.modelo.elementos.herramientas.Lapiz;
 import com.retur.paint.modelo.elementos.pintura.ColorSeleccionado;
 import com.retur.paint.modelo.elementos.pintura.Lienzo;
+import com.retur.paint.modelo.funciones.ApoyoControladores;
 
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
@@ -27,10 +26,9 @@ public class ControladorPintar {
 	private static final String COLOR1_DEFECTO = "#000000";
 	private static final String COLOR2_DEFECTO = "#FFFFFF";
 	
+	private final Label COORDENADA_RATON_LIENZO;
 	public final ColorSeleccionado COLOR1;
 	public final ColorSeleccionado COLOR2;
-	private final Label COORDENADA_RATON_LIENZO;
-	private final ArrayList<String> lista;
 	
 	
 	private Herramienta herramientaSeleccionada;
@@ -43,10 +41,12 @@ public class ControladorPintar {
 		
 		COLOR1 = new ColorSeleccionado(color1, COLOR1_DEFECTO);
 		COLOR2 = new ColorSeleccionado(color2, COLOR2_DEFECTO);
+		ApoyoControladores.pintarCanvasBotones(COLOR1);
+		ApoyoControladores.pintarCanvasBotones(COLOR2);
 		COORDENADA_RATON_LIENZO = posicionRaton;
 		herramientaSeleccionada = Lapiz.getInstance();
 		herramientaSeleccionada.seleccionado();
-		lista = new ArrayList<String>();
+		COLOR1.seleccionado();
 		
 	}
 	
@@ -59,23 +59,20 @@ public class ControladorPintar {
 		if(COLOR1.isSeleccionado()) {
 			
 			COLOR1.setColor(color);
+			ApoyoControladores.pintarCanvasBotones(COLOR1);
 			
 		}else if(COLOR2.isSeleccionado()) {
 			
 			COLOR2.setColor(color);
+			ApoyoControladores.pintarCanvasBotones(COLOR2);
 			
 		}
 		
 	}
 	
-	private void actualizarMuestreoColorSelec() {
-		
-		
-		
-	}
-	
+
 	/**
-	 * Cambia la herramienta seleccionada que se utilizara en el lienzo.
+	 * Cambia la herramienta seleccionada que se utilizará en el lienzo.
 	 * @param herramienta Recibe la herramienta que se va a utilizar.
 	 */
 	public void cambioHerramienta(Herramienta herramienta) {
@@ -93,9 +90,9 @@ public class ControladorPintar {
 	 * @param y
 	 * @return
 	 */
-	private String textoCoordenadas(int x, int y) {
+	private void actualizarLabelCoordenadas() {
 		
-		return "X: " + lienzo.getPosRatonX() + ", Y: " + lienzo.getPosRatonY();
+		COORDENADA_RATON_LIENZO.setText("X: " + lienzo.getPosRatonX() + ", Y: " + lienzo.getPosRatonY());
 		
 	}
 	
@@ -113,9 +110,9 @@ public class ControladorPintar {
 			@Override
 			public void handle(MouseEvent event) {
 				
-				lienzo.setPosRatonX((int) event.getX());
-				lienzo.setPosRatonY((int) event.getY());
-				COORDENADA_RATON_LIENZO.setText(textoCoordenadas(lienzo.getPosRatonX(), lienzo.getPosRatonY()));
+
+				lienzo.setPosRaton((int) event.getX(), (int) event.getY());
+				actualizarLabelCoordenadas();
 				
 			}
 			
@@ -130,17 +127,14 @@ public class ControladorPintar {
 			
 				//TODO Aqui el while no funciona, porque no para al detectar el siguiene elemento el siguiente elemento.
 				//while(pintando) {
-					double xRaton = e.getX();
-					double yRaton = e.getY();
-				if(xRaton >= 0 && xRaton < lienzo.ANCHO_LIENZO && yRaton >= 0 && yRaton < lienzo.ALTO_LIENZO) {
+				if(herramientaSeleccionada instanceof HerramientaDibujo) {
 					
-					lista.add("X: " + xRaton + " Y: " + yRaton);
-					lienzo.rellenarColorPixel((int)e.getX(),(int) e.getY(), COLOR1_DEFECTO);
+					pintarColorSeleccionado(e);
 					
 				}
-					
-
-					
+				
+				actualizarLabelCoordenadas();
+				
 				//}
 
 			}
@@ -153,7 +147,7 @@ public class ControladorPintar {
 			@Override
 			public void handle(MouseEvent e) {
 			
-				COORDENADA_RATON_LIENZO.setText(textoCoordenadas(lienzo.getPosRatonX(), lienzo.getPosRatonY()));
+				actualizarLabelCoordenadas();
 				
 			}
 		});
@@ -165,16 +159,7 @@ public class ControladorPintar {
 			@Override
 			public void handle(MouseEvent e) {
 				
-				if(e.getButton() == MouseButton.PRIMARY) {
-					//TODO Añadir una forma de obtener el color seleccionado.
-					lienzo.rellenarColorPixel((int)e.getX(),(int) e.getY(), COLOR1.getColor());
-
-					
-				}else if(e.getButton() == MouseButton.SECONDARY){
-					
-					lienzo.rellenarColorPixel((int)e.getX(),(int) e.getY(), COLOR1_DEFECTO);
-					
-				}
+				pintarColorSeleccionado(e);
 				
 				pintando = true;
 				
@@ -182,6 +167,25 @@ public class ControladorPintar {
 		});
 		
 		lienzo.CANVAS_LIENZO.addEventFilter(MouseEvent.MOUSE_RELEASED, (e) -> pintando = false);
+		
+	}
+	
+	private void pintarColorSeleccionado(MouseEvent e) {
+		
+		HerramientaDibujo herramientaDibujo = (HerramientaDibujo) herramientaSeleccionada;
+		
+		lienzo.setPosRaton((int) e.getX(), (int) e.getY());
+		
+		if(e.getButton() == MouseButton.PRIMARY) {
+			
+			herramientaDibujo.pintar(COLOR1.getColor(), lienzo);						
+			
+		}else if(e.getButton() == MouseButton.SECONDARY) {
+			
+			herramientaDibujo.pintar(COLOR2.getColor(), lienzo);				
+			
+		}
+		
 		
 	}
 

@@ -23,5 +23,20 @@ public abstract class Herramienta implements Seleccionable{
 		
 	}
 	
+	@Override
+	public void seleccionado() {
+		
+		this.botonHerramienta.getStyleClass().add(CLASE_SELECCIONADO);
+		
+	}
+	
+	@Override
+	public void deseleccionado() {
+		
+		
+		
+		
+	}
+	
 	
 }

@@ -2,12 +2,15 @@ package com.retur.paint.modelo.elementos.herramientas;
 
 import java.io.File;
 
+import com.retur.paint.modelo.elementos.interfaces.Pintable;
+import com.retur.paint.modelo.elementos.interfaces.Pintor;
+
 import javafx.scene.ImageCursor;
 import javafx.scene.image.Image;
 
 
 
-public class Lapiz extends HerramientaDibujo {
+public final class Lapiz extends HerramientaDibujo implements Pintor{
 
 	private static final String DIR_IMAGEN_CURSOR = new File("src/resources/images/lapiz.png").toURI().toString();
 	private static final double COLOCACION_CURSO_X = 0;
@@ -18,7 +21,7 @@ public class Lapiz extends HerramientaDibujo {
 	private Lapiz() {
 		
 		super(new ImageCursor(new Image(DIR_IMAGEN_CURSOR,DIMENSION_CURSOR,DIMENSION_CURSOR,false,false), COLOCACION_CURSO_X, COLOCACION_CURSO_Y));
-		usarPrimerRango();
+		usarCuartoRango();
 		
 	}
 	
@@ -87,16 +90,27 @@ public class Lapiz extends HerramientaDibujo {
 	}
 
 	@Override
-	public void seleccionado() {
+	public void pintar(String color, Pintable pintable) {
 		
-		super.botonHerramienta.getStyleClass().add(CLASE_SELECCIONADO);
+		String zonaColorear[][] = new String[rangoDibujo.length][rangoDibujo[0].length];
+		
+		for(int i = 0; i < zonaColorear.length; i++) {
+			
+			for(int j = 0; j < zonaColorear[i].length; j++) {
+				
+				if(rangoDibujo[i][j]) {
+					
+					zonaColorear[i][j] = color;
+					
+				}
+				
+			}
+			
+			
+		}
 		
 		
-	}
-	
-	@Override
-	public void deseleccionado() {
-		// TODO Auto-generated method stub
+		pintable.pintado(zonaColorear);
 		
 	}
 	

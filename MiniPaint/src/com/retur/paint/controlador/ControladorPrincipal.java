@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import com.retur.paint.modelo.elementos.herramientas.Goma;
 import com.retur.paint.modelo.elementos.herramientas.Lapiz;
 import com.retur.paint.modelo.elementos.pintura.Lienzo;
+import com.retur.paint.modelo.funciones.ApoyoControladores;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -80,6 +81,7 @@ public class ControladorPrincipal implements Initializable {
 		
 		for(Node nodo : gridBotonesColores.getChildren()) {
 			
+			
 			if(nodo instanceof Button) {
 				
 				Button boton = (Button) nodo;
@@ -89,6 +91,10 @@ public class ControladorPrincipal implements Initializable {
 				if(boton.getText().isEmpty()) {
 					
 					botonesColoresAjustables.add(boton);
+					
+				}else {
+					
+					ApoyoControladores.pintarCanvasBotones(boton);
 					
 				}
 				

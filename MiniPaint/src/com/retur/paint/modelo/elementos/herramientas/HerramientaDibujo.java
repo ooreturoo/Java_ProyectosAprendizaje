@@ -2,15 +2,15 @@ package com.retur.paint.modelo.elementos.herramientas;
 
 
 
+import com.retur.paint.modelo.elementos.interfaces.Pintor;
+
 import javafx.scene.ImageCursor;
 
-public abstract class HerramientaDibujo extends Herramienta {
+public abstract class HerramientaDibujo extends Herramienta implements Pintor{
 	
 	protected static final int DIMENSION_CURSOR = 25;
 
-	
-	private String color;
-	private boolean[][] rangoDibujo;
+	protected boolean[][] rangoDibujo;
 	
 	public HerramientaDibujo(ImageCursor estiloCursor) {
 		
@@ -40,14 +40,6 @@ public abstract class HerramientaDibujo extends Herramienta {
 		
 		this.rangoDibujo = crearCuartoRango();
 		
-	}
-	
-	public String getColor() {
-		return color;
-	}
-
-	public void setColor(String color) {
-		this.color = color;
 	}
 	
 	public boolean[][] getRangoDibujo() {

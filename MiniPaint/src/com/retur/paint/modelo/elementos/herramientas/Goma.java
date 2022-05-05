@@ -2,10 +2,12 @@ package com.retur.paint.modelo.elementos.herramientas;
 
 import java.io.File;
 
+import com.retur.paint.modelo.elementos.interfaces.Pintable;
+
 import javafx.scene.ImageCursor;
 import javafx.scene.image.Image;
 
-public class Goma extends HerramientaDibujo {
+public final class Goma extends HerramientaDibujo {
 
 	private static final String DIR_IMAGEN_CURSOR = new File("src/resources/images/goma.png").toURI().toString();
 	private static final double COLOCACION_CURSO_X = 0;
@@ -81,15 +83,10 @@ public class Goma extends HerramientaDibujo {
 	}
 
 	@Override
-	public void seleccionado() {
+	public void pintar(String color, Pintable pintable) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
-	public void deseleccionado() {
-		// TODO Auto-generated method stub
-		
-	}
 
 }
