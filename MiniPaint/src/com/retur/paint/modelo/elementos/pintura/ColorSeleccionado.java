@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 public class ColorSeleccionado implements Seleccionable{
 
 	
-	private final Button BOTON_COLOR_SELEC;
+	public final Button BOTON_COLOR_SELEC;
 	public final Canvas MUESTREO_COLOR;
 	private String color;
 	private boolean seleccionado;
@@ -38,7 +38,8 @@ public class ColorSeleccionado implements Seleccionable{
 	public void seleccionado() {
 		
 		seleccionado = true;
-		BOTON_COLOR_SELEC.getStyleClass().add(CLASE_SELECCIONADO);
+		BOTON_COLOR_SELEC.getStyleClass().remove(ELEMENTO_DESELECCIONADO);
+		BOTON_COLOR_SELEC.getStyleClass().add(ELEMENTO_SELECCIONADO);
 		
 	}
 
@@ -46,7 +47,8 @@ public class ColorSeleccionado implements Seleccionable{
 	public void deseleccionado() {
 		
 		seleccionado = false;
-		BOTON_COLOR_SELEC.getStyleClass().add("botonColor");
+		BOTON_COLOR_SELEC.getStyleClass().remove(ELEMENTO_SELECCIONADO);
+		BOTON_COLOR_SELEC.getStyleClass().add(ELEMENTO_DESELECCIONADO);
 		
 	}
 	

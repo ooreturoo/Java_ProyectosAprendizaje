@@ -4,11 +4,11 @@ package com.retur.paint.modelo.elementos.pintura;
 
 
 
+import com.retur.paint.modelo.elementos.herramientas.Herramienta;
 import com.retur.paint.modelo.elementos.interfaces.Pintable;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 
@@ -18,25 +18,32 @@ public class Lienzo implements Pintable {
 	public final Canvas CANVAS_LIENZO;
 	public final int ALTO_LIENZO;
 	public final int ANCHO_LIENZO;
-	private final String[][] LIENZO;
+	public final String[][] LIENZO;
 	private int posRatonX;
 	private int posRatonY;
 	
 	
-	public Lienzo(int ancho,int alto, ScrollPane zonaLienzo) {
+	public Lienzo(int ancho,int alto, AnchorPane zonaLienzo, Herramienta herramientaSeleccionada) {
 		
 		ALTO_LIENZO = alto;
 		ANCHO_LIENZO = ancho;
 		LIENZO = new String[ALTO_LIENZO][ANCHO_LIENZO];
 		
 		ANCHOR_LIENZO = new AnchorPane();
+		ANCHOR_LIENZO.getStyleClass().add("lienzo");
+		ANCHOR_LIENZO.setLayoutX(10);
+		ANCHOR_LIENZO.setLayoutY(10);
 		ANCHOR_LIENZO.setPrefWidth(ancho);
 		ANCHOR_LIENZO.setPrefHeight(alto);
 		
 		CANVAS_LIENZO = new Canvas(ancho,alto);
 		
 		ANCHOR_LIENZO.getChildren().add(CANVAS_LIENZO);
-		zonaLienzo.setContent(ANCHOR_LIENZO);
+		AnchorPane.setTopAnchor(ANCHOR_LIENZO, 10.0);
+		AnchorPane.setLeftAnchor(ANCHOR_LIENZO, 10.0);
+		zonaLienzo.getChildren().add(ANCHOR_LIENZO);
+		
+		cambiarCursor(herramientaSeleccionada);
 		
 	}
 	
@@ -49,7 +56,16 @@ public class Lienzo implements Pintable {
 	private void pintarCanvas(int x, int y) {
 		
 		GraphicsContext gc = CANVAS_LIENZO.getGraphicsContext2D();
-		gc.setFill(Color.web(LIENZO[y][x]));
+		if (LIENZO[y][x].equals("")) {
+			
+			gc.setFill(Color.web("#FFFFFF"));
+			
+		}else {
+			
+			gc.setFill(Color.web(LIENZO[y][x]));
+			
+		}
+		
 		gc.fillRect(x, y, 1, 1);
 		
 	}
@@ -95,9 +111,17 @@ public class Lienzo implements Pintable {
 		}
 		
 	}
+	
+	public void cambiarCursor(Herramienta herramienta) {
+		
+		CANVAS_LIENZO.setCursor(herramienta.ESTILO_CURSOR);
+		
+	}
 
 	public int getPosRatonX() {
+		
 		return posRatonX;
+		
 	}
 	
 	public void setPosRaton(int posRatonX, int posRatonY) {
@@ -108,7 +132,9 @@ public class Lienzo implements Pintable {
 	}	
 
 	public int getPosRatonY() {
+		
 		return posRatonY;
+		
 	}
 
 

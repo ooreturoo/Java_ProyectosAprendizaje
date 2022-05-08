@@ -5,6 +5,7 @@ import java.io.File;
 import com.retur.paint.modelo.elementos.interfaces.Pintable;
 import com.retur.paint.modelo.elementos.interfaces.Pintor;
 
+
 import javafx.scene.ImageCursor;
 import javafx.scene.image.Image;
 
@@ -14,15 +15,15 @@ public final class Lapiz extends HerramientaDibujo implements Pintor{
 
 	private static final String DIR_IMAGEN_CURSOR = new File("src/resources/images/lapiz.png").toURI().toString();
 	private static final double COLOCACION_CURSO_X = 0;
-	private static final double COLOCACION_CURSO_Y = 0;
+	private static final double COLOCACION_CURSO_Y = DIMENSION_CURSOR - 6;
 	
 	private static Lapiz instance;
 	
 	private Lapiz() {
 		
-		super(new ImageCursor(new Image(DIR_IMAGEN_CURSOR,DIMENSION_CURSOR,DIMENSION_CURSOR,false,false), COLOCACION_CURSO_X, COLOCACION_CURSO_Y));
-		usarCuartoRango();
-		
+		super(new ImageCursor(new Image(DIR_IMAGEN_CURSOR,DIMENSION_CURSOR,DIMENSION_CURSOR,true,false), COLOCACION_CURSO_X, COLOCACION_CURSO_Y));
+		usarPrimerRango();
+
 	}
 	
 	public static Lapiz getInstance() {

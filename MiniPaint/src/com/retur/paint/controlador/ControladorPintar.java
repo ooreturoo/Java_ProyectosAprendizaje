@@ -2,13 +2,17 @@ package com.retur.paint.controlador;
 
 
 
+import com.retur.paint.modelo.elementos.Rango;
+import com.retur.paint.modelo.elementos.RangosPintura;
 import com.retur.paint.modelo.elementos.herramientas.Herramienta;
 import com.retur.paint.modelo.elementos.herramientas.HerramientaDibujo;
 import com.retur.paint.modelo.elementos.herramientas.Lapiz;
+import com.retur.paint.modelo.elementos.herramientas.SelectorColor;
 import com.retur.paint.modelo.elementos.pintura.ColorSeleccionado;
 import com.retur.paint.modelo.elementos.pintura.Lienzo;
 import com.retur.paint.modelo.funciones.ApoyoControladores;
 
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -79,7 +83,64 @@ public class ControladorPintar {
 		
 		herramientaSeleccionada.deseleccionado();
 		this.herramientaSeleccionada = herramienta;
+		
+		if(lienzo != null) {
+			
+			lienzo.CANVAS_LIENZO.setCursor(herramientaSeleccionada.ESTILO_CURSOR);
+			
+		}
+		
 		this.herramientaSeleccionada.seleccionado();
+		
+	}
+		
+	/**
+	 * Cambia el tamaño de al herramienta seleccionada.
+	 * @param size
+	 * @throws HerramientaSeleccionadaException
+	 */
+	public void cambiosRangos(Rango rango){
+		
+		HerramientaDibujo herramienta = (HerramientaDibujo) herramientaSeleccionada;
+		RangosPintura rangoPintura = rango.RANGO_PINTURA;
+		
+		if(rangoPintura == RangosPintura.PRIMER_RANGO) {
+			
+			herramienta.usarPrimerRango();
+			
+		}else if (rangoPintura == RangosPintura.SEGUNDO_RANGO) {
+			
+			herramienta.usarSegundoRango();
+			
+		}else if (rangoPintura == RangosPintura.TERCER_RANGO) {
+			
+			herramienta.usarTercerRango();
+			
+		}else if (rangoPintura == RangosPintura.CUARTO_RANGO) {
+			
+			herramienta.usarCuartoRango();
+			
+		}
+		
+		herramienta.setRangoEnUso(rangoPintura);
+		
+	}
+	
+	public void cambioColorSeleccionado(ActionEvent event) {
+		
+		Object obj = event.getSource();
+		
+		if(obj == COLOR1.BOTON_COLOR_SELEC && !COLOR1.isSeleccionado()) {
+			
+			COLOR2.deseleccionado();
+			COLOR1.seleccionado();
+			
+		}else if (obj == COLOR2.BOTON_COLOR_SELEC && !COLOR2.isSeleccionado()) {
+			
+			COLOR1.deseleccionado();
+			COLOR2.seleccionado();
+			
+		}
 		
 	}
 	
@@ -159,7 +220,33 @@ public class ControladorPintar {
 			@Override
 			public void handle(MouseEvent e) {
 				
-				pintarColorSeleccionado(e);
+				
+				if(herramientaSeleccionada instanceof HerramientaDibujo) {
+					
+					pintarColorSeleccionado(e);
+					
+				}
+				
+				
+				if (herramientaSeleccionada instanceof SelectorColor) {
+					
+					SelectorColor selector = (SelectorColor) herramientaSeleccionada;
+					ColorSeleccionado colorSeleccionado = null;
+					
+					if(e.getButton() == MouseButton.PRIMARY) {
+						
+						colorSeleccionado = COLOR1;
+						
+					}else if (e.getButton() == MouseButton.SECONDARY) {
+						
+						colorSeleccionado = COLOR2;
+						
+					}
+					
+					selector.obtenerColor((int)e.getX(), (int)e.getY(), lienzo, colorSeleccionado);
+					
+					
+				}
 				
 				pintando = true;
 				
@@ -213,6 +300,12 @@ public class ControladorPintar {
 	public void setBotonPresionado(MouseButton botonPresionado) {
 		this.botonPresionado = botonPresionado;
 	}
+
+	public Herramienta getHerramientaSeleccionada() {
+		return herramientaSeleccionada;
+	}
+
+
 	
 	
 	

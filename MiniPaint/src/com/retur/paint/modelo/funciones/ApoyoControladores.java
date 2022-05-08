@@ -31,6 +31,7 @@ public class ApoyoControladores {
 	 * @param colorSeleccionado
 	 */
 	public static void pintarCanvasBotones(ColorSeleccionado colorSeleccionado) {
+		
 		double ancho = colorSeleccionado.MUESTREO_COLOR.getWidth();
 		double alto = colorSeleccionado.MUESTREO_COLOR.getHeight();
 		GraphicsContext gc = colorSeleccionado.MUESTREO_COLOR.getGraphicsContext2D();
@@ -40,6 +41,7 @@ public class ApoyoControladores {
 		gc.strokeRect(0, 0, colorSeleccionado.MUESTREO_COLOR.getWidth(),colorSeleccionado.MUESTREO_COLOR.getHeight());
 		
 	}
+	
 	
 	
 }
