@@ -243,7 +243,7 @@ public class ControladorPintar {
 						
 					}
 					
-					selector.obtenerColor((int)e.getX(), (int)e.getY(), lienzo, colorSeleccionado);
+					selector.obtenerColor((int)e.getX(), (int)e.getY(), lienzo.LIENZO, colorSeleccionado);
 					
 					
 				}

@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 
 import com.retur.paint.modelo.elementos.Rango;
 import com.retur.paint.modelo.elementos.RangosPintura;
+import com.retur.paint.modelo.elementos.herramientas.CuboRelleno;
 import com.retur.paint.modelo.elementos.herramientas.Goma;
 import com.retur.paint.modelo.elementos.herramientas.Herramienta;
 import com.retur.paint.modelo.elementos.herramientas.HerramientaDibujo;
@@ -50,6 +51,8 @@ public class ControladorPrincipal implements Initializable {
 	private Button goma;
 	@FXML
 	private Button selectorColor;
+	@FXML
+	private Button cuboRelleno;
 	
 	@FXML
 	private MenuItem primerRangoVentana;
@@ -94,6 +97,7 @@ public class ControladorPrincipal implements Initializable {
 		Lapiz.getInstance().init(lapiz);
 		Goma.getInstance().init(goma);
 		SelectorColor.getInstance().init(selectorColor);
+		CuboRelleno.getInstance().init(cuboRelleno);
 		
 		primerRango = new Rango(primerRangoVentana, RangosPintura.PRIMER_RANGO);
 		segundoRango = new Rango(segundoRangoVentana, RangosPintura.SEGUNDO_RANGO);
@@ -181,9 +185,13 @@ public class ControladorPrincipal implements Initializable {
 			
 			herramienta = Goma.getInstance();
 			
-		} else if (obj == selectorColor) {
+		}else if (obj == selectorColor) {
 			
 			herramienta = SelectorColor.getInstance();
+			
+		}else if(obj == cuboRelleno) {
+			
+			herramienta = CuboRelleno.getInstance();
 			
 		}
 		
