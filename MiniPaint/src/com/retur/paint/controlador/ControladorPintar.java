@@ -4,9 +4,11 @@ package com.retur.paint.controlador;
 
 import com.retur.paint.modelo.elementos.Rango;
 import com.retur.paint.modelo.elementos.RangosPintura;
+import com.retur.paint.modelo.elementos.herramientas.CuboRelleno;
 import com.retur.paint.modelo.elementos.herramientas.Herramienta;
 import com.retur.paint.modelo.elementos.herramientas.HerramientaDibujo;
 import com.retur.paint.modelo.elementos.herramientas.Lapiz;
+import com.retur.paint.modelo.elementos.herramientas.Lupa;
 import com.retur.paint.modelo.elementos.herramientas.SelectorColor;
 import com.retur.paint.modelo.elementos.pintura.ColorSeleccionado;
 import com.retur.paint.modelo.elementos.pintura.Lienzo;
@@ -18,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ZoomEvent;
 
 /**
  * 
@@ -38,7 +41,7 @@ public class ControladorPintar {
 	private Herramienta herramientaSeleccionada;
 	private Lienzo lienzo;
 	private MouseButton botonPresionado;
-	private boolean pintando;
+	private ColorSeleccionado colorSeleccionado;
 
 	
 	public ControladorPintar(Button color1, Button color2, Label posicionRaton) {
@@ -50,6 +53,7 @@ public class ControladorPintar {
 		COORDENADA_RATON_LIENZO = posicionRaton;
 		herramientaSeleccionada = Lapiz.getInstance();
 		herramientaSeleccionada.seleccionado();
+		colorSeleccionado = COLOR1;
 		COLOR1.seleccionado();
 		
 	}
@@ -60,17 +64,8 @@ public class ControladorPintar {
 	 */
 	public void cambioColor(String color) {
 		
-		if(COLOR1.isSeleccionado()) {
-			
-			COLOR1.setColor(color);
-			ApoyoControladores.pintarCanvasBotones(COLOR1);
-			
-		}else if(COLOR2.isSeleccionado()) {
-			
-			COLOR2.setColor(color);
-			ApoyoControladores.pintarCanvasBotones(COLOR2);
-			
-		}
+		colorSeleccionado.setColor(color);
+		ApoyoControladores.pintarCanvasBotones(colorSeleccionado);
 		
 	}
 	
@@ -130,14 +125,16 @@ public class ControladorPintar {
 		
 		Object obj = event.getSource();
 		
-		if(obj == COLOR1.BOTON_COLOR_SELEC && !COLOR1.isSeleccionado()) {
+		if(obj == COLOR1.BOTON_COLOR_SELEC && COLOR1 != colorSeleccionado) {
 			
 			COLOR2.deseleccionado();
+			colorSeleccionado = COLOR1;
 			COLOR1.seleccionado();
 			
-		}else if (obj == COLOR2.BOTON_COLOR_SELEC && !COLOR2.isSeleccionado()) {
+		}else if (obj == COLOR2.BOTON_COLOR_SELEC && COLOR2 != colorSeleccionado) {
 			
 			COLOR1.deseleccionado();
+			colorSeleccionado = COLOR2;
 			COLOR2.seleccionado();
 			
 		}
@@ -186,17 +183,11 @@ public class ControladorPintar {
 			@Override
 			public void handle(MouseEvent e) {
 			
-				//TODO Aqui el while no funciona, porque no para al detectar el siguiene elemento el siguiente elemento.
-				//while(pintando) {
-				if(herramientaSeleccionada instanceof HerramientaDibujo) {
-					
-					pintarColorSeleccionado(e);
-					
-				}
+				pintarHerramientaDibujo(e);
 				
 				actualizarLabelCoordenadas();
 				
-				//}
+
 
 			}
 		});
@@ -220,40 +211,28 @@ public class ControladorPintar {
 			@Override
 			public void handle(MouseEvent e) {
 				
+				pintarHerramientaDibujo(e);
 				
-				if(herramientaSeleccionada instanceof HerramientaDibujo) {
-					
-					pintarColorSeleccionado(e);
-					
-				}
+				obtenerColorHerramientaSelector(e);
 				
+				rellenarCubo(e);
 				
-				if (herramientaSeleccionada instanceof SelectorColor) {
-					
-					SelectorColor selector = (SelectorColor) herramientaSeleccionada;
-					ColorSeleccionado colorSeleccionado = null;
-					
-					if(e.getButton() == MouseButton.PRIMARY) {
-						
-						colorSeleccionado = COLOR1;
-						
-					}else if (e.getButton() == MouseButton.SECONDARY) {
-						
-						colorSeleccionado = COLOR2;
-						
-					}
-					
-					selector.obtenerColor((int)e.getX(), (int)e.getY(), lienzo.LIENZO, colorSeleccionado);
-					
-					
-				}
-				
-				pintando = true;
+				zoomLupa(e);
+
 				
 			}
 		});
 		
-		lienzo.CANVAS_LIENZO.addEventFilter(MouseEvent.MOUSE_RELEASED, (e) -> pintando = false);
+		lienzo.CANVAS_LIENZO.addEventHandler(ZoomEvent.ZOOM, new EventHandler<ZoomEvent>() {
+
+			@Override
+			public void handle(ZoomEvent e) {
+			
+				System.out.println("zoom");
+				
+			}
+		});
+		
 		
 	}
 	
@@ -275,6 +254,78 @@ public class ControladorPintar {
 		
 		
 	}
+	
+	
+	private void pintarHerramientaDibujo(MouseEvent e) {
+		
+		if(herramientaSeleccionada instanceof HerramientaDibujo) {
+			
+			pintarColorSeleccionado(e);
+			
+		}
+		
+	}
+	
+	private void obtenerColorHerramientaSelector(MouseEvent e) {
+		
+		if (herramientaSeleccionada instanceof SelectorColor) {
+			
+			SelectorColor selector = (SelectorColor) herramientaSeleccionada;
+			ColorSeleccionado colorSeleccionado = null;
+			
+			if(e.getButton() == MouseButton.PRIMARY) {
+				
+				colorSeleccionado = COLOR1;
+				
+			}else if (e.getButton() == MouseButton.SECONDARY) {
+				
+				colorSeleccionado = COLOR2;
+				
+			}
+			
+			selector.obtenerColor((int)e.getX(), (int)e.getY(), lienzo.LIENZO, colorSeleccionado);
+			
+		}
+		
+	}
+	
+	private void rellenarCubo(MouseEvent e) {
+		
+		if(herramientaSeleccionada instanceof CuboRelleno) {
+			
+			CuboRelleno cubo= (CuboRelleno) herramientaSeleccionada;
+			ColorSeleccionado colorSeleccionado = null;
+			
+			if(e.getButton() == MouseButton.PRIMARY) {
+				
+				colorSeleccionado = COLOR1;
+				
+			}else if (e.getButton() == MouseButton.SECONDARY) {
+				
+				colorSeleccionado = COLOR2;
+				
+			}
+			
+			cubo.rellenar((int)e.getX(), (int)e.getY(), lienzo, colorSeleccionado.getColor());
+			
+		}
+		
+	}
+	
+	
+	private void zoomLupa(MouseEvent e) {
+		
+		if(herramientaSeleccionada instanceof Lupa) {
+			
+			Lupa lupa = (Lupa) herramientaSeleccionada;
+			
+			lupa.hacerZoom(lienzo.CANVAS_LIENZO, e.getX(), e.getY());
+			
+			
+		}
+		
+	}
+	
 
 	public Lienzo getLienzo() {
 		return lienzo;
@@ -285,13 +336,6 @@ public class ControladorPintar {
 		eventosCanvas();
 	}
 
-	public boolean isPintando() {
-		return pintando;
-	}
-
-	public void setPintando(boolean pintando) {
-		this.pintando = pintando;
-	}
 
 	public MouseButton getBotonPresionado() {
 		return botonPresionado;

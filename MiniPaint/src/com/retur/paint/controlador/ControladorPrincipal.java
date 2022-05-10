@@ -14,6 +14,7 @@ import com.retur.paint.modelo.elementos.herramientas.Goma;
 import com.retur.paint.modelo.elementos.herramientas.Herramienta;
 import com.retur.paint.modelo.elementos.herramientas.HerramientaDibujo;
 import com.retur.paint.modelo.elementos.herramientas.Lapiz;
+import com.retur.paint.modelo.elementos.herramientas.Lupa;
 import com.retur.paint.modelo.elementos.herramientas.SelectorColor;
 import com.retur.paint.modelo.elementos.pintura.Lienzo;
 import com.retur.paint.modelo.funciones.ApoyoControladores;
@@ -53,6 +54,8 @@ public class ControladorPrincipal implements Initializable {
 	private Button selectorColor;
 	@FXML
 	private Button cuboRelleno;
+	@FXML
+	private Button lupa;
 	
 	@FXML
 	private MenuItem primerRangoVentana;
@@ -98,6 +101,7 @@ public class ControladorPrincipal implements Initializable {
 		Goma.getInstance().init(goma);
 		SelectorColor.getInstance().init(selectorColor);
 		CuboRelleno.getInstance().init(cuboRelleno);
+		Lupa.getInstance().init(lupa);
 		
 		primerRango = new Rango(primerRangoVentana, RangosPintura.PRIMER_RANGO);
 		segundoRango = new Rango(segundoRangoVentana, RangosPintura.SEGUNDO_RANGO);
@@ -193,6 +197,10 @@ public class ControladorPrincipal implements Initializable {
 			
 			herramienta = CuboRelleno.getInstance();
 			
+		}else if(obj == lupa) {
+			
+			herramienta = Lupa.getInstance();
+			
 		}
 		
 		if(herramienta instanceof HerramientaDibujo) {
@@ -267,7 +275,7 @@ public class ControladorPrincipal implements Initializable {
 	@FXML
 	private void comienzoPintar(MouseEvent e) {
 		
-		cPintar.setPintando(true);
+
 		cPintar.setBotonPresionado(e.getButton());
 		
 	}
@@ -275,7 +283,6 @@ public class ControladorPrincipal implements Initializable {
 	@FXML
 	private void finalPintar(MouseEvent e) {
 		
-		cPintar.setPintando(false);
 		
 		
 	}

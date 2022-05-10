@@ -53,7 +53,7 @@ public class Lienzo implements Pintable {
 		
 	}
 	
-	private void pintarCanvas(int x, int y) {
+	public void pintarCanvas(int x, int y) {
 		
 		GraphicsContext gc = CANVAS_LIENZO.getGraphicsContext2D();
 		if (LIENZO[y][x].equals("")) {
