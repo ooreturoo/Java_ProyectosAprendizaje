@@ -3,7 +3,6 @@ package com.retur.paint.modelo.elementos.herramientas;
 import java.io.File;
 
 import com.retur.paint.modelo.elementos.pintura.ColorSeleccionado;
-import com.retur.paint.modelo.elementos.pintura.Lienzo;
 import com.retur.paint.modelo.funciones.ApoyoControladores;
 
 import javafx.scene.ImageCursor;
@@ -36,17 +35,17 @@ public class SelectorColor extends Herramienta {
 	}
 
 	
-	public void obtenerColor(int x, int y, Lienzo lienzo, ColorSeleccionado colorSeleccionado) {
+	public void obtenerColor(int x, int y, String[][] lienzo, ColorSeleccionado colorSeleccionado) {
 		
 		String color = null;
 		
-		if(lienzo.LIENZO[y][x] == null || lienzo.LIENZO[y][x].equals("")) {
+		if(lienzo[y][x] == null || lienzo[y][x].equals("")) {
 			
 			color = "#FFFFFF";
 			
 		}else {
 			
-			color = lienzo.LIENZO[y][x];
+			color = lienzo[y][x];
 			
 		}
 		
