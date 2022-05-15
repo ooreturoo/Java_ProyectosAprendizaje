@@ -171,7 +171,7 @@ public class ControladorPintar {
 
 				lienzo.setPosRaton((int) event.getX(), (int) event.getY());
 				actualizarLabelCoordenadas();
-				
+				System.out.println("X " + event.getX() + "Y " + event.getY());
 			}
 			
 		};
