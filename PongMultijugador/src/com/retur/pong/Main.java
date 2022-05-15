@@ -1,23 +1,28 @@
 package com.retur.pong;
 	
+import com.retur.pong.controlador.ControladorVentanaPrincipal;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
-import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 
 
 public class Main extends Application {
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(Stage stage) {
 		
 		try {
-			BorderPane root = new BorderPane();
-			Scene scene = new Scene(root,400,400);
+			
+			ControladorVentanaPrincipal controladorVP = new ControladorVentanaPrincipal();
 			//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.show();
+			stage.setScene(controladorVP.VISTA_PRINCIPAL.ESCENA_INICIO);
+			stage.setResizable(false);
+			stage.show();
+			
 		} catch(Exception e) {
+			
+			
 			e.printStackTrace();
+			
 		}
 	}
 	
