@@ -164,14 +164,14 @@ public class ControladorPintar {
 		// y capturar que al dejar de draguear se deje de pintar.
 		
 		EventHandler<MouseEvent> eventoPosicion = new EventHandler<MouseEvent>() {
-
+			//TODO USAR robot javafx y migrar el metodo al exterior con un while.
+			
 			@Override
 			public void handle(MouseEvent event) {
 				
 
 				lienzo.setPosRaton((int) event.getX(), (int) event.getY());
 				actualizarLabelCoordenadas();
-				System.out.println("X " + event.getX() + "Y " + event.getY());
 			}
 			
 		};
