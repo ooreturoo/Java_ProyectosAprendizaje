@@ -3,6 +3,7 @@ package com.retur.pong.modelo.elementos;
 import com.retur.pong.modelo.interfaces.Movible;
 import com.retur.pong.modelo.interfaces.Pintable;
 
+import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -14,11 +15,11 @@ public class Jugador implements Pintable, Movible{
 	private int vidas;
 	private Pala palaJugador;
 	
-	public Jugador(String nombre, double x, double y) {
+	public Jugador(String nombre, Point2D coordenadas) {
 		
 		this.nombre = nombre;
 		this.vidas = VIDAS;
-		this.palaJugador = new Pala(x, y);
+		this.palaJugador = new Pala(coordenadas);
 		
 	}
 	
@@ -46,13 +47,15 @@ public class Jugador implements Pintable, Movible{
 
 	@Override
 	public void mover(Canvas superficieMovimiento) {
-		// TODO Auto-generated method stub
+		
+		palaJugador.mover(superficieMovimiento);
 		
 	}
 
 	@Override
 	public void pintar(GraphicsContext gc) {
-		// TODO Auto-generated method stub
+		
+		palaJugador.pintar(gc);
 		
 	}
 	

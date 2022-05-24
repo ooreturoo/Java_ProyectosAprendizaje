@@ -6,6 +6,7 @@ import com.retur.paint.modelo.elementos.interfaces.Pintable;
 
 import javafx.scene.ImageCursor;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 public final class Goma extends HerramientaDibujo {
 
@@ -103,8 +104,8 @@ public final class Goma extends HerramientaDibujo {
 	}
 
 	@Override
-	public void pintar(String color, Pintable pintable) {
-		String zonaColorear[][] = new String[rangoDibujo.length][rangoDibujo[0].length];
+	public void pintar(Color color, Pintable pintable) {
+		Color zonaColorear[][] = new Color[rangoDibujo.length][rangoDibujo[0].length];
 		
 		for(int i = 0; i < zonaColorear.length; i++) {
 			
@@ -112,7 +113,7 @@ public final class Goma extends HerramientaDibujo {
 				
 				if(rangoDibujo[i][j]) {
 					
-					zonaColorear[i][j] = "";
+					zonaColorear[i][j] = Color.WHITE;
 					
 				}
 				

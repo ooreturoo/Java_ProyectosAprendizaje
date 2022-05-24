@@ -35,7 +35,7 @@ public class ApoyoControladores {
 		double ancho = colorSeleccionado.MUESTREO_COLOR.getWidth();
 		double alto = colorSeleccionado.MUESTREO_COLOR.getHeight();
 		GraphicsContext gc = colorSeleccionado.MUESTREO_COLOR.getGraphicsContext2D();
-		gc.setFill(Color.web(colorSeleccionado.getColor()));
+		gc.setFill(colorSeleccionado.getColor());
 		gc.fillRect(2,2,ancho-4, alto-4);
 		gc.setStroke(Color.web("#6C6D6D"));
 		gc.strokeRect(0, 0, colorSeleccionado.MUESTREO_COLOR.getWidth(),colorSeleccionado.MUESTREO_COLOR.getHeight());

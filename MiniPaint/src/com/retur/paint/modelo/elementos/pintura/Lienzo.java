@@ -18,7 +18,6 @@ public class Lienzo implements Pintable {
 	public final Canvas CANVAS_LIENZO;
 	public final int ALTO_LIENZO;
 	public final int ANCHO_LIENZO;
-	public final String[][] LIENZO;
 	private int posRatonX;
 	private int posRatonY;
 	
@@ -27,7 +26,6 @@ public class Lienzo implements Pintable {
 		
 		ALTO_LIENZO = alto;
 		ANCHO_LIENZO = ancho;
-		LIENZO = new String[ALTO_LIENZO][ANCHO_LIENZO];
 		
 		ANCHOR_LIENZO = new AnchorPane();
 		ANCHOR_LIENZO.getStyleClass().add("lienzo");
@@ -47,32 +45,18 @@ public class Lienzo implements Pintable {
 		
 	}
 	
-	public String obtenerColorPixel(int x, int y) {
-		
-		return LIENZO[y][x];
-		
-	}
-	
-	public void pintarCanvas(int x, int y) {
+	public void pintarLienzo(int x, int y, Color color) {
 		
 		GraphicsContext gc = CANVAS_LIENZO.getGraphicsContext2D();
-		if (LIENZO[y][x].equals("")) {
-			
-			gc.setFill(Color.web("#FFFFFF"));
-			
-		}else {
-			
-			gc.setFill(Color.web(LIENZO[y][x]));
-			
-		}
 		
+		gc.setFill(color);
 		gc.fillRect(x, y, 1, 1);
 		
 	}
 
 
 	@Override
-	public void pintado(String[][] zonaColorear) {
+	public void pintado(Color[][] zonaColorear) {
 		
 		int posPintandoXInicial = posRatonX - zonaColorear[0].length/2;
 		int posPintandoY = posRatonY - zonaColorear.length/2;
@@ -97,8 +81,7 @@ public class Lienzo implements Pintable {
 				
 				if(zonaColorear[i][j] != null) {
 					
-					LIENZO[posPintandoY][posPintandoX] = zonaColorear[i][j];
-					pintarCanvas(posPintandoX, posPintandoY);
+					pintarLienzo(posPintandoX, posPintandoY, zonaColorear[i][j]);
 					
 				}
 				

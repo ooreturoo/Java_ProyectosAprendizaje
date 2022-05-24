@@ -21,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ZoomEvent;
+import javafx.scene.paint.Color;
 
 /**
  * 
@@ -46,8 +47,8 @@ public class ControladorPintar {
 	
 	public ControladorPintar(Button color1, Button color2, Label posicionRaton) {
 		
-		COLOR1 = new ColorSeleccionado(color1, COLOR1_DEFECTO);
-		COLOR2 = new ColorSeleccionado(color2, COLOR2_DEFECTO);
+		COLOR1 = new ColorSeleccionado(color1, Color.web(COLOR1_DEFECTO));
+		COLOR2 = new ColorSeleccionado(color2, Color.web(COLOR2_DEFECTO));
 		ApoyoControladores.pintarCanvasBotones(COLOR1);
 		ApoyoControladores.pintarCanvasBotones(COLOR2);
 		COORDENADA_RATON_LIENZO = posicionRaton;
@@ -58,11 +59,25 @@ public class ControladorPintar {
 		
 	}
 	
+	/*
+	 * TODO No es necesario tener una clase lienzo con una matriz de Strings, se puede obtener el color
+	 * del Canvas con Robot e incluso hay otras clasees más que creo que pueden hacer lo mismo.
+	 * Por lo que habria que cambiar la clase de color seleccionado a que en vez de almacenar un String
+	 * almacene un objeto de la clase Color y hacer los cambios de tipo al setearlos o al seleccionar 
+	 * un color nuevo.
+	 * Habria que buscar una opción de usar robot en un bucle while dentro de un nuevo hilo, puesto 
+	 * que solo puede usarse robot en el hilo principal de javafx, por lo que limitaría el uso de 
+	 * un pintado fluido.
+	 * Usar la clase point2D si no se puede con el robot e intentar hacer un trazado limpio utilizando
+	 * angulos etc.
+	 * 
+	 */
+	
 	/**
 	 * Cambia el color de los botones que se pintaran dependiendo del botón del ratón pulsado.
 	 * @param color Recibe el color que se guardará en el botón.
 	 */
-	public void cambioColor(String color) {
+	public void cambioColor(Color color) {
 		
 		colorSeleccionado.setColor(color);
 		ApoyoControladores.pintarCanvasBotones(colorSeleccionado);
@@ -283,7 +298,7 @@ public class ControladorPintar {
 				
 			}
 			
-			selector.obtenerColor((int)e.getX(), (int)e.getY(), lienzo.LIENZO, colorSeleccionado);
+			selector.obtenerColor((int)e.getX(), (int)e.getY(),lienzo.CANVAS_LIENZO, colorSeleccionado);
 			
 		}
 		
@@ -306,7 +321,7 @@ public class ControladorPintar {
 				
 			}
 			
-			cubo.rellenar((int)e.getX(), (int)e.getY(), lienzo, colorSeleccionado.getColor());
+			cubo.rellenar((int)e.getX(), (int)e.getY(), colorSeleccionado.getColor());
 			
 		}
 		

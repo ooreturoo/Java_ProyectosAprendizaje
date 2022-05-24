@@ -1,13 +1,12 @@
-<<<<<<< HEAD
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
-=======
 import java.awt.MouseInfo;
->>>>>>> 6ef25f45806e903b6dedec7d307bdd74dba8f5c3
+
 
 public class Prueba {
 
@@ -15,7 +14,7 @@ public class Prueba {
 	
 	public static void main(String[] args) {
 		
-<<<<<<< HEAD
+
 //		List<Integer> lista = new LinkedList<Integer>();
 //		
 //		lista.add(5);
@@ -47,16 +46,12 @@ public class Prueba {
 			System.out.println(num + ",");
 			
 		}	
-=======
+
 		for(int i = 0; i < 10000; i++) {
 			
 			System.out.println(MouseInfo.getPointerInfo().getLocation().x);
-			
+		
 		}
-		
-		
->>>>>>> 6ef25f45806e903b6dedec7d307bdd74dba8f5c3
-		
 	}
 	
 }

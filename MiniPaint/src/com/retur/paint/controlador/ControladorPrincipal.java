@@ -32,6 +32,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 
 public class ControladorPrincipal implements Initializable {
 	
@@ -163,7 +164,8 @@ public class ControladorPrincipal implements Initializable {
 		
 		if(!boton.getText().isEmpty()) {
 			
-			cPintar.cambioColor(boton.getText());
+			
+			cPintar.cambioColor(Color.web(boton.getText()));
 			
 		}
 	

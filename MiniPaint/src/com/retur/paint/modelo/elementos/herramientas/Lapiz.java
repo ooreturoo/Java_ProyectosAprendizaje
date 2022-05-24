@@ -8,6 +8,7 @@ import com.retur.paint.modelo.elementos.interfaces.Pintor;
 
 import javafx.scene.ImageCursor;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 
 
@@ -91,9 +92,9 @@ public final class Lapiz extends HerramientaDibujo implements Pintor{
 	}
 
 	@Override
-	public void pintar(String color, Pintable pintable) {
+	public void pintar(Color color, Pintable pintable) {
 		
-		String zonaColorear[][] = new String[rangoDibujo.length][rangoDibujo[0].length];
+		Color zonaColorear[][] = new Color[rangoDibujo.length][rangoDibujo[0].length];
 		
 		for(int i = 0; i < zonaColorear.length; i++) {
 			

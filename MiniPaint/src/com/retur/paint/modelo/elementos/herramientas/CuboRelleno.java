@@ -2,10 +2,9 @@ package com.retur.paint.modelo.elementos.herramientas;
 
 import java.io.File;
 
-import com.retur.paint.modelo.elementos.pintura.Lienzo;
-
 import javafx.scene.ImageCursor;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 public class CuboRelleno extends Herramienta{
 
@@ -33,35 +32,9 @@ public class CuboRelleno extends Herramienta{
 		
 	}
 	
-	public void rellenar(int xInicial, int yInicial, Lienzo lienzo, String color) {
+	public void rellenar(int xInicial, int yInicial, Color color) {
 		
-		for(int y = yInicial - 1 ; y <= yInicial + 1; y++) {
-			
-			if(y < 0 || y >= lienzo.LIENZO.length) {
-				
-				continue;
-				
-			}
-			
-			for(int x = xInicial - 1; x <= xInicial + 1; x++) {
-				
-				if(x < 0 || x >= lienzo.LIENZO[0].length) {
-					
-					continue;
-					
-				}
-				
-				if((lienzo.LIENZO[y][x] == null || lienzo.LIENZO[y][x].equals("")) && x < 50 && y < 50) {
-					
-					lienzo.LIENZO[y][x] = color;
-					lienzo.pintarCanvas(x,y);
-					rellenar(x, y, lienzo, color);
-					
-				}
-				
-			}
-			
-		}
+	
 		
 		
 		

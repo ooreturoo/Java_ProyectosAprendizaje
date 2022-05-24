@@ -1,5 +1,7 @@
 package com.retur.paint.modelo.elementos.interfaces;
 
+import javafx.scene.paint.Color;
+
 public interface Pintor {
 
 	
@@ -9,6 +11,6 @@ public interface Pintor {
 	 * @param color
 	 * @param pintable
 	 */
-	void pintar(String color, Pintable pintable);
+	void pintar(Color color, Pintable pintable);
 	
 }
