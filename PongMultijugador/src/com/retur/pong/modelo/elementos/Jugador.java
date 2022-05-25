@@ -1,13 +1,9 @@
 package com.retur.pong.modelo.elementos;
 
-import com.retur.pong.modelo.interfaces.Movible;
-import com.retur.pong.modelo.interfaces.Pintable;
 
 import javafx.geometry.Point2D;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 
-public class Jugador implements Pintable, Movible{
+public class Jugador{
 
 	private static final int VIDAS = 3;
 	
@@ -45,20 +41,5 @@ public class Jugador implements Pintable, Movible{
 		return palaJugador;
 	}
 
-	@Override
-	public void mover(Canvas superficieMovimiento) {
-		
-		palaJugador.mover(superficieMovimiento);
-		
-	}
-
-	@Override
-	public void pintar(GraphicsContext gc) {
-		
-		palaJugador.pintar(gc);
-		
-	}
-	
-	
 	
 }

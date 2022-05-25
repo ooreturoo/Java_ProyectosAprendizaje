@@ -3,10 +3,7 @@ package com.retur.pong.modelo.juego;
 import com.retur.pong.modelo.elementos.Jugador;
 import com.retur.pong.modelo.elementos.Pala;
 import com.retur.pong.modelo.elementos.Pelota;
-import com.retur.pong.modelo.interfaces.Movible;
-import com.retur.pong.modelo.interfaces.Pintable;
 
-import javafx.beans.binding.IntegerBinding;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -27,7 +24,6 @@ public class Juego extends Thread{
 	public Juego(Canvas zonaJuego, String nombreJ1, String nombreJ2) {
 		
 		this.ZONA_JUEGO = zonaJuego;
-		//TODO Introducir posiciones de comienzo de jugadores calculandolo con la zona de juego.
 		
 		this.JUGADOR1 = new Jugador(nombreJ1, posInicioJ1());
 		this.JUGADOR2 = new Jugador(nombreJ2, posInicioJ2());
@@ -39,7 +35,6 @@ public class Juego extends Thread{
 	@Override
 	public void run() {
 		
-		iniciado = true;
 		bucleJuego();
 		
 		
@@ -48,6 +43,8 @@ public class Juego extends Thread{
 	
 	
 	private void bucleJuego() {
+		
+		iniciado = true;
 		
 		double nsPorSegundoFPS = 1000000000/FPS;
 		double nsPorSegundoAPS = 1000000000/APS;
@@ -60,6 +57,8 @@ public class Juego extends Thread{
 		long tiempoMilis = System.currentTimeMillis();
 		
 		while(iniciado) {
+			
+			boolean vidaQuitada = false;
 			
 			//Almacena el tiempo de la vuelta del bucle.
 			tiempoActual = System.nanoTime();
@@ -81,6 +80,8 @@ public class Juego extends Thread{
 			while(delta >= 1) {
 				
 				movimientoElementos();
+				vidaQuitada = actualizacionesElementosJuego();
+			
 				delta--;
 				
 			}
@@ -99,10 +100,25 @@ public class Juego extends Thread{
 			//Se duerme el hilo para aumentar la eficiencia y reducir el consumo de recursos.
 			
 			try {
-				sleep(0,(int) ((delta)*100000));
+				
+				if (vidaQuitada && iniciado) {
+				
+					sleep(3000);
+					bucleJuego();
+					
+				}else {
+					
+					sleep(0,(int) ((delta)*100000));
+
+				}
+				
 			} catch (InterruptedException e) {
+				
 				e.printStackTrace();
+				
 			}
+			
+			
 			
 		}
 		
@@ -111,8 +127,8 @@ public class Juego extends Thread{
 	private void movimientoElementos() {
 		
 		PELOTA.mover(ZONA_JUEGO);
-		JUGADOR1.mover(ZONA_JUEGO);
-		JUGADOR2.mover(ZONA_JUEGO);
+		JUGADOR1.getPalaJugador().mover(ZONA_JUEGO);
+		JUGADOR2.getPalaJugador().mover(ZONA_JUEGO);
 		
 	}
 	
@@ -126,8 +142,64 @@ public class Juego extends Thread{
 		double mitadX = ZONA_JUEGO.getWidth()/2;
 		gc.strokeLine(mitadX, 0, mitadX, ZONA_JUEGO.getHeight());
 		PELOTA.pintar(gc);
-		JUGADOR1.pintar(gc);
-		JUGADOR2.pintar(gc);
+		JUGADOR1.getPalaJugador().pintar(gc);
+		JUGADOR2.getPalaJugador().pintar(gc);
+		
+	}
+	
+	private boolean actualizacionesElementosJuego(){
+		//TODO CORREGIR que se mueva un poco al terminar el bucle de juego.
+
+		JUGADOR1.getPalaJugador().golpeo(PELOTA);
+		JUGADOR2.getPalaJugador().golpeo(PELOTA);
+		boolean vidaQuitada = quitarVidaJugador();
+		
+		if (vidaQuitada) {
+			resetearPosiciones();
+		}
+		
+		return vidaQuitada;
+		
+	}
+	
+	private boolean quitarVidaJugador(){
+		
+		boolean vidaQuitada = false;
+		
+		if(PELOTA.getX() <= 0) {
+			
+			JUGADOR1.reducirVida();
+			vidaQuitada = true;
+			
+		}else if((PELOTA.getX() + Pelota.RADIO) >= ZONA_JUEGO.getWidth()) {
+			
+			JUGADOR2.reducirVida();
+			vidaQuitada = true;
+			
+		}
+		
+		comprobarDerrotaJugador();
+	
+		return vidaQuitada;
+		
+	}
+	
+	private void resetearPosiciones(){
+		
+		System.out.println("J1: " + JUGADOR1.getVidas() + "---- J2: " + JUGADOR2.getVidas());
+		JUGADOR1.getPalaJugador().restablecerPosicionInicial();
+		JUGADOR2.getPalaJugador().restablecerPosicionInicial();
+		PELOTA.restablecerPosicionInicial();
+		
+	}
+	
+	private void comprobarDerrotaJugador() {
+		
+		if(JUGADOR1.getVidas() == 0 || JUGADOR2.getVidas() == 0) {
+			
+			iniciado = false;
+			
+		}
 		
 	}
 	
