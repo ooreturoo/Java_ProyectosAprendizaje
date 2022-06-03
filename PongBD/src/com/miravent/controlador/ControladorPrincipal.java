@@ -11,11 +11,21 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * Controlador de la ventana inicial que se muestra al iniciar la aplicación.
+ * @author Sergio
+ *
+ */
 public class ControladorPrincipal {
 	
+	/**
+	 * Cambia a la ventana de juego.
+	 * @param event
+	 */
 	@FXML
 	private void jugar(ActionEvent event) {
 		
+		//Se obtiene el stage a partir del disparador del evento.
 		Node nodo =  (Node) event.getSource();
 		Stage stage = (Stage) nodo.getScene().getWindow();
 		

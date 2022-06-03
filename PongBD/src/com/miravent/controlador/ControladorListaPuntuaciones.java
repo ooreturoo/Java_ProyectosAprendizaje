@@ -5,6 +5,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import com.miravent.controlador.bd.ConexionBD;
 import com.miravent.modelo.bd.InteraccionesBD;
 import com.miravent.modelo.componentes.registros.Registro;
 
@@ -18,6 +19,11 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * Controlador de la ventana que muestra la lista de puntuaciones obtenidas de la base de datos.
+ * @author Sergio
+ *
+ */
 public class ControladorListaPuntuaciones implements Initializable {
 
 	@FXML
@@ -27,10 +33,11 @@ public class ControladorListaPuntuaciones implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		try {
-			
-			
-			ObservableList<Registro> elementos = FXCollections.observableList(InteraccionesBD.obtenerMejoresPuntuaciones());
+			//Se obtiene la lista de elementos de la base de datos y se transforma en una lista observable.
+			ObservableList<Registro> elementos = FXCollections.observableList(InteraccionesBD.obtenerMejoresPuntuaciones(ConexionBD.getConexion()));
+			//Se ordena la lista por el orden natural de los registros.
 			FXCollections.sort(elementos);
+			//Se añade los elementos a la ListView que los mostrará.
 			lista.setItems(elementos);
 			
 		} catch (SQLException e) {
@@ -39,9 +46,11 @@ public class ControladorListaPuntuaciones implements Initializable {
 		
 		}
 		
-		
 	}
 	
+	/**
+	 * Captura el evento al pulsar el botón para volver a la ventana de la puntuación obtenida.
+	 */
 	@FXML
 	private void volverAPuntuaciones() {
 		

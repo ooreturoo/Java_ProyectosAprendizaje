@@ -4,6 +4,7 @@ package com.miravent;
 import java.sql.SQLException;
 
 import com.miravent.controlador.bd.ConexionBD;
+import com.miravent.modelo.bd.InteraccionesBD;
 import com.miravent.modelo.componentes.alertas.Alertas;
 import com.miravent.modelo.componentes.alertas.mensajes.MensajesAlerta;
 
@@ -26,15 +27,21 @@ public class Main extends Application {
 			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("/com/miravent/vista/VentanaInicial.fxml"));
 			Scene scene = new Scene(root);
 			primaryStage.setOnHidden(event -> {
-				try {
+				
+				if(ConexionBD.getConexion() != null) {
 					
-					ConexionBD.cerrarConexion();
-					
-				} catch (SQLException e) {
-					
-					e.printStackTrace();
+					try {
+						
+						ConexionBD.cerrarConexion();
+						
+					} catch (SQLException e) {
+						
+						e.printStackTrace();
+						
+					}
 					
 				}
+				
 			});
 			primaryStage.setScene(scene);
 			primaryStage.show();
@@ -43,6 +50,7 @@ public class Main extends Application {
 			try {
 				
 				ConexionBD.establecerConexion();
+				InteraccionesBD.creacionTabla(ConexionBD.getConexion());
 				
 			} catch (SQLException e) {
 				

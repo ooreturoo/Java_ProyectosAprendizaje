@@ -12,6 +12,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
+/**
+ * Clase que representa a la pala con la que juega el jugador.
+ * @author Sergio
+ *
+ */
 public class Pala implements Pintable, Movible{
 
 	private static final double VELOCIDAD_INICIAL = 4.5;
@@ -23,7 +28,6 @@ public class Pala implements Pintable, Movible{
 	public static final double ANCHO = 8;
 	public static final double LONGITUD_INICIAL = 100;
 	
-	private final double COORDENADA_X_INICIAL;
 	private final double Y;
 
 	private double x;
@@ -38,7 +42,6 @@ public class Pala implements Pintable, Movible{
 		
 		this.Y = coordenadas.getY();
 		this.x = coordenadas.getX();
-		this.COORDENADA_X_INICIAL = x;
 		this.velocidad = VELOCIDAD_INICIAL;
 		this.longitud = LONGITUD_INICIAL;
 		this.rangosColision = crearRangosPala();
@@ -55,7 +58,7 @@ public class Pala implements Pintable, Movible{
 		
 		//***Pintar Rango Colision***
 		 //gc.setStroke(Color.RED);
-		// gc.strokeRect(rangosColision[0].getX(), rangosColision[0].getY(), rangosColision[0].getWidth(), rangosColision[0].getHeight());
+		 //gc.strokeRect(rangosColision[0].getX(), rangosColision[0].getY(), rangosColision[0].getWidth(), rangosColision[0].getHeight());
 		 //gc.strokeRect(rangosColision[1].getX(), rangosColision[1].getY(), rangosColision[1].getWidth(), rangosColision[1].getHeight());
 		
 	}
@@ -76,15 +79,22 @@ public class Pala implements Pintable, Movible{
 			
 		}
 		
+		//Se relocaliza las zonas de colisión de la pala.
 		rangosColision[0].setX(x);
 		rangosColision[1].setX(x + longitud/2);
 		
 	}
 	
 	
+	/**
+	 * Comprueba si la pala llega a golpear a la pelota.
+	 * @param pelota
+	 * @return 
+	 */
 	public boolean golpeo(Pelota pelota) {
 		
 		boolean golpeado = false;
+		
 		
 		Bounds golpeoIzquierda = Shape.intersect(rangosColision[0], pelota.getRangoColision()).getLayoutBounds();
 		Bounds golpeoDerecha = Shape.intersect(rangosColision[1], pelota.getRangoColision()).getLayoutBounds();
@@ -121,6 +131,10 @@ public class Pala implements Pintable, Movible{
 		
 	}
 	
+	/**
+	 * Modifica la dirección de la pelota al ser golpeada por el lado izquierda.
+	 * @param pelota
+	 */
 	private void golpeoIzquierda(Pelota pelota) {
 		
 		pelota.setDerecha(false);
@@ -129,6 +143,10 @@ public class Pala implements Pintable, Movible{
 		
 	}
 	
+	/**
+	 * Modifica la dirección de la pelota al ser golpeada por el lado derecho.
+	 * @param pelota
+	 */
 	private void golpeoDerecha(Pelota pelota) {
 		
 		pelota.setDerecha(true);
@@ -137,6 +155,10 @@ public class Pala implements Pintable, Movible{
 		
 	}
 	
+	/**
+	 * Crea los rangos de colisión de la pala.
+	 * @return
+	 */
 	private Rectangle[] crearRangosPala() {
 		
 		Rectangle[] rangos = new Rectangle[2];
@@ -148,6 +170,9 @@ public class Pala implements Pintable, Movible{
 		
 	}
 	
+	/**
+	 * Incrementa la velocidad a la que se mueve la pala.
+	 */
 	public void incrementarVelocidad() {
 		
 		if(velocidad < VELOCIDAD_MAXIMA) {
@@ -158,6 +183,9 @@ public class Pala implements Pintable, Movible{
 		
 	}
 	
+	/**
+	 * Decrementa el tamaño de la pala.
+	 */
 	public void decrementarLongitud() {
 		
 		if(longitud > LONGITUD_MINIMA) {
@@ -168,23 +196,6 @@ public class Pala implements Pintable, Movible{
 		}
 		
 	}
-	
-	@Override
-	public void restablecerPosicionInicial() {
-		
-		this.x = COORDENADA_X_INICIAL;
-		resetearValores();
-		
-	}
-	
-	public void resetearValores() {
-		
-		velocidad = VELOCIDAD_INICIAL;
-		longitud = LONGITUD_INICIAL;
-		rangosColision = crearRangosPala();
-		
-	}
-
 
 	public boolean isDerecha() {
 		return derecha;

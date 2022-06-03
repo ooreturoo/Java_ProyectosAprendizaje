@@ -4,29 +4,33 @@ package com.miravent.modelo.componentes;
 
 import javafx.geometry.Point2D;
 
+/**
+ * Clase que representa a un jugador.
+ * @author Sergio
+ *
+ */
 public class Jugador{
 
 	
-	private int puntos;
+	private Puntuacion puntuacion;
 	private Pala palaJugador;
 	
 	public Jugador(Point2D coordenadas) {
 		
-		this.puntos = 0;
+		this.puntuacion = Puntuacion.INSTANCE;
+		this.puntuacion.setPuntos(0);
+		this.puntuacion.setRegistrado(false);
 		this.palaJugador = new Pala(coordenadas);
 		
 	}
 	
-	public void resetear() {
+
+	/**
+	 * Suma los puntos cada vez que se produce un golpeo del jugador a la pelota.
+	 */
+	public void sumarPuntosGolpeo(int puntos) {
 		
-		puntos = 0;
-		palaJugador.resetearValores();
-		
-	}
-	
-	public void sumarPuntosGolpeo() {
-		
-		this.puntos += 100;
+		puntuacion.sumaDePuntos(puntos);
 		
 	}
 
@@ -36,9 +40,10 @@ public class Jugador{
 		
 	}
 
-	public int getPuntos() {
-		return puntos;
+	public Puntuacion getPuntuacion() {
+		return puntuacion;
 	}
+
 
 	
 }

@@ -11,6 +11,12 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+
+/**
+ * Clase que representa la pelota.
+ * @author Sergio
+ *
+ */
 public class Pelota implements Pintable, Movible{
 
 	private static final double VELOCIDAD_INICIAL = 6;
@@ -22,8 +28,6 @@ public class Pelota implements Pintable, Movible{
 	
 	public static final int RADIO_INICIAL = 19;
 
-	
-	private final Point2D COORDENADAS_INICIALES;
 	
 	
 	private double x;
@@ -38,7 +42,6 @@ public class Pelota implements Pintable, Movible{
 	
 	public Pelota(Point2D coordenadas) {
 		
-		this.COORDENADAS_INICIALES = coordenadas;
 		this.x = coordenadas.getX();
 		this.y = coordenadas.getY();
 		this.radio = RADIO_INICIAL;
@@ -47,6 +50,10 @@ public class Pelota implements Pintable, Movible{
 		
 	}
 
+	/**
+	 * Crea el rango de colisión de la pelota.
+	 * @return
+	 */
 	private Rectangle crearRangoColision() {
 		
 		return new Rectangle(x, y, radio * 2, radio * 2);
@@ -108,16 +115,6 @@ public class Pelota implements Pintable, Movible{
 
 
 	@Override
-	public void restablecerPosicionInicial() {
-		
-		this.x = COORDENADAS_INICIALES.getX();
-		this.y = COORDENADAS_INICIALES.getY();
-		rangoColision = crearRangoColision();
-		
-	}
-
-
-	@Override
 	public void pintar(GraphicsContext gc) {
 		
 		gc.setFill(Color.AQUA);
@@ -131,6 +128,10 @@ public class Pelota implements Pintable, Movible{
 		 */
 	}
 	
+	
+	/**
+	 * Incrementa la velocidad de la pelota.
+	 */
 	public void incrementarVelocidad() {
 		
 		if(velocidad < VELOCIDAD_MAXIMA) {
@@ -141,6 +142,9 @@ public class Pelota implements Pintable, Movible{
 		
 	}
 	
+	/**
+	 * Decrementa el radio de la pelota.
+	 */
 	public void decrementarRadio() {
 		
 		if(radio > RADIO_MINIMO) {

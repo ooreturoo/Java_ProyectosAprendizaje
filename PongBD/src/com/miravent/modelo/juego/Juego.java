@@ -3,7 +3,7 @@ package com.miravent.modelo.juego;
 
 import java.io.IOException;
 
-import com.miravent.controlador.ControladorPuntuacion;
+
 import com.miravent.modelo.componentes.Jugador;
 import com.miravent.modelo.componentes.Pala;
 import com.miravent.modelo.componentes.Pelota;
@@ -14,12 +14,14 @@ import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 public class Juego extends Thread{
 
+	private static final int PUNTOS_GOLPEO = 100; 
 	private static final int FPS = 60;
 	private static final int APS = 60;
 	
@@ -45,6 +47,15 @@ public class Juego extends Thread{
 	public void run() {
 		
 		pintarTodo();
+		try {
+			
+			sleep(2000);
+			
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+			
+		}
 		bucleJuego();
 		finalJuego();
 		
@@ -133,10 +144,9 @@ public class Juego extends Thread{
 				Stage stage = (Stage) ZONA_JUEGO.getScene().getWindow();
 				
 				try {
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/miravent/vista/VentanaPuntuacion.fxml"));
-					stage.setScene(new Scene(loader.load()));
-					ControladorPuntuacion controlador = loader.getController();
-					controlador.asignarPuntuacion(String.valueOf(JUGADOR.getPuntos()));
+				
+					AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("/com/miravent/vista/VentanaPuntuacion.fxml"));
+					stage.setScene(new Scene(root));
 					
 				} catch (IOException e) {
 				
@@ -175,7 +185,7 @@ public class Juego extends Thread{
 		
 		gc.setFill(Color.BLACK);
 		gc.setTextAlign(TextAlignment.RIGHT);
-		gc.fillText(String.valueOf(JUGADOR.getPuntos()), ZONA_JUEGO.getWidth() - 10, 15);
+		gc.fillText(String.valueOf(JUGADOR.getPuntuacion().getPuntos()), ZONA_JUEGO.getWidth() - 10, 15);
 		
 	}
 	
@@ -202,14 +212,14 @@ public class Juego extends Thread{
 	
 	private void subidaNivel() {
 		
-		if(JUGADOR.getPuntos() % 500 == 0) {
+		if(JUGADOR.getPuntuacion().getPuntos() % 500 == 0) {
 			
 			PELOTA.decrementarRadio();
 			JUGADOR.getPalaJugador().decrementarLongitud();
 			
 		}
 		
-		if(JUGADOR.getPuntos() % 1000 == 0) {
+		if(JUGADOR.getPuntuacion().getPuntos() % 1000 == 0) {
 			
 			PELOTA.incrementarVelocidad();
 			JUGADOR.getPalaJugador().incrementarVelocidad();
@@ -224,7 +234,7 @@ public class Juego extends Thread{
 		
 		if(golpeado) {
 			
-			JUGADOR.sumarPuntosGolpeo();
+			JUGADOR.sumarPuntosGolpeo(PUNTOS_GOLPEO);
 			subidaNivel();
 
 		}
