@@ -8,6 +8,8 @@ import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 
 public class Juego extends Thread{
 
@@ -35,6 +37,13 @@ public class Juego extends Thread{
 	@Override
 	public void run() {
 		
+		pintarTodo();
+		try {
+			sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		bucleJuego();
 		
 		
@@ -54,7 +63,6 @@ public class Juego extends Thread{
 	
 		long tiempoActual;
 		long tiempoTranscurrido = System.nanoTime();
-		long tiempoMilis = System.currentTimeMillis();
 		
 		while(iniciado) {
 			
@@ -139,7 +147,11 @@ public class Juego extends Thread{
 		gc.setFill(Color.GREY);
 		gc.fillRect( 0, 0, ZONA_JUEGO.getWidth(), ZONA_JUEGO.getHeight());
 		
+		gc.setFill(Color.BLACK);
+		marcadoresVidas();
+		
 		double mitadX = ZONA_JUEGO.getWidth()/2;
+		gc.setStroke(Color.BLACK);
 		gc.strokeLine(mitadX, 0, mitadX, ZONA_JUEGO.getHeight());
 		PELOTA.pintar(gc);
 		JUGADOR1.getPalaJugador().pintar(gc);
@@ -186,7 +198,6 @@ public class Juego extends Thread{
 	
 	private void resetearPosiciones(){
 		
-		System.out.println("J1: " + JUGADOR1.getVidas() + "---- J2: " + JUGADOR2.getVidas());
 		JUGADOR1.getPalaJugador().restablecerPosicionInicial();
 		JUGADOR2.getPalaJugador().restablecerPosicionInicial();
 		PELOTA.restablecerPosicionInicial();
@@ -230,7 +241,19 @@ public class Juego extends Thread{
 		
 	}
 	
-
+	private void marcadoresVidas() {
+		
+		GraphicsContext gc = ZONA_JUEGO.getGraphicsContext2D();
+		
+		gc.setFont(new Font("Arial", 15));
+		
+		gc.setTextAlign(TextAlignment.LEFT);
+		gc.fillText("Vidas: " + JUGADOR1.getVidas(), 10, ZONA_JUEGO.getHeight() - 10);
+		
+		gc.setTextAlign(TextAlignment.RIGHT);
+		gc.fillText("Vidas: " + JUGADOR2.getVidas(), ZONA_JUEGO.getWidth() - 10, ZONA_JUEGO.getHeight() - 10);
+		
+	}
 
 	
 	

@@ -91,6 +91,12 @@ public class Pelota implements Pintable, Movible{
 		gc.setFill(Color.AQUA);
 		gc.fillOval(x, y, RADIO*2, RADIO*2);
 		
+		
+		/***Pintar Rango Colision***
+		 * 
+		 *gc.setStroke(Color.RED);
+		 *gc.strokeRect(x, y, RADIO*2, RADIO*2);
+		*/
 	}
 
 	

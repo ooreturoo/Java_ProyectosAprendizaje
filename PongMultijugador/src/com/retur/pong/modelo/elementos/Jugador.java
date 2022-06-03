@@ -1,6 +1,7 @@
 package com.retur.pong.modelo.elementos;
 
 
+
 import javafx.geometry.Point2D;
 
 public class Jugador{

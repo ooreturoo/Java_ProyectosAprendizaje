@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="750.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.miravent.controlador.ControladorJuego">
+   <children>
+      <Canvas fx:id="zonaJuego" focusTraversable="true" height="750.0" onKeyPressed="#pulsarTeclaMovimiento" onKeyReleased="#soltarTeclaMovimiento" width="550.0" />
+   </children>
+</AnchorPane>
