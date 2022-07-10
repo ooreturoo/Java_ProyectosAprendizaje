@@ -215,7 +215,5 @@ public class Pala implements Pintable, Movible{
 	public void setIzquierda(boolean izquierda) {
 		this.izquierda = izquierda;
 	}
-
-	
 	
 }

@@ -7,6 +7,8 @@ import java.io.IOException;
 import com.miravent.modelo.componentes.Jugador;
 import com.miravent.modelo.componentes.Pala;
 import com.miravent.modelo.componentes.Pelota;
+import com.miravent.modelo.interfaces.Movible;
+import com.miravent.modelo.interfaces.Pintable;
 
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +21,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+
+/**
+ * Realiza todas las acciones desde el inicio hasta el final del juego en un nuevo hilo.
+ * @author Sergio
+ *
+ */
 public class Juego extends Thread{
 
 	private static final int PUNTOS_GOLPEO = 100; 
@@ -62,7 +70,10 @@ public class Juego extends Thread{
 	}
 	
 	
-	
+	/**
+	 * Es el elemento principal del juego, el cuál desde que se incia hasta que la pelota cae, se encarga del movimiento,
+	 * las comprobaciones y el pintado de los componentes del juego.
+	 */
 	private void bucleJuego() {
 		
 		iniciado = true;
@@ -134,8 +145,13 @@ public class Juego extends Thread{
 		
 	}
 	
+	/**
+	 * Se debe llamar a este método al finalizar el juego para que antes de acabar la ejecución del hilo,
+	 * se cambie la ventana del juego por el menú de puntuciones.
+	 */
 	private void finalJuego() {
 		
+		//Ejecuta un subhilo perteneciente al hilo principal de JavaFX para que pueda ser cambiada la escena de la interfaz.
 		Platform.runLater(new Runnable() {
 			
 			@Override
@@ -158,6 +174,10 @@ public class Juego extends Thread{
 		
 	}
 	
+	/**
+	 * Agrupa todas las llamadas al método mover de la interfaz {@link Movible} de los elementos del juego
+	 * y además comprueba que si en esos movimientos llega a ser golpeada la pelota por la pala.
+	 */
 	private void movimientoElementos() {
 		
 		PELOTA.mover(ZONA_JUEGO);
@@ -166,6 +186,10 @@ public class Juego extends Thread{
 		
 	}
 	
+	/**
+	 * Agrupa el dibujado de todos los elementos que implementas la interfaz {@link Pintable} y los demás
+	 * elementos que se dibujarán en el juego.
+	 */
 	private void pintarTodo() {
 		
 		GraphicsContext gc = ZONA_JUEGO.getGraphicsContext2D();
@@ -181,6 +205,10 @@ public class Juego extends Thread{
 		
 	}
 	
+	/**
+	 * Pinta la puntuación del jugador en la parte superior derecha del juego.
+	 * @param gc
+	 */
 	private void pintarPuntuacion(GraphicsContext gc) {
 		
 		gc.setFill(Color.BLACK);
@@ -189,6 +217,10 @@ public class Juego extends Thread{
 		
 	}
 	
+	/**
+	 * Pinta el tiempo que se lleva jugando en la parte superior izquierda del juego.
+	 * @param gc
+	 */
 	private void pintarTemporizador(GraphicsContext gc) {
 
 		gc.setFill(Color.BLACK);
@@ -197,6 +229,13 @@ public class Juego extends Thread{
 		
 	}
 	
+	
+
+	/**
+	 * Formatea el tiempo que lleva el juego iniciado(en milisegundos) a un formato
+	 * de horas:minutos:segundos.
+	 * @return
+	 */
 	private String obtenerFormatoTiempoJuego() {
 		
 		int segundos = (int) (tiempoDeJuego % 60);
@@ -210,6 +249,11 @@ public class Juego extends Thread{
 		
 	}
 	
+	/**
+	 * Se encarga de subir la dificultad del juego. A partir de la puntuación del jugador.
+	 * Por cada 500 puntos que gane el jugador se decrementara el tamaño de la pelota y de la pala.
+	 * Por cada 1000 puntos que gane el jugador se incrementara la velocidad de la pelota y de la pala.
+	 */
 	private void subidaNivel() {
 		
 		if(JUGADOR.getPuntuacion().getPuntos() % 500 == 0) {
@@ -228,6 +272,11 @@ public class Juego extends Thread{
 		
 	}
 	
+	
+	/**
+	 * Comprueba cada golpeo de la pelota y una vez se produce se suman los puntos al jugador y llama al
+	 * método encargado de la subida de la dificultad.
+	 */
 	private void comprobacionGolpeo() {
 		
 		boolean golpeado = JUGADOR.getPalaJugador().golpeo(PELOTA);
@@ -241,6 +290,10 @@ public class Juego extends Thread{
 	}
 
 	
+	/**
+	 * Crea y devuelve la posición donde comienza el jugador.
+	 * @return
+	 */
 	private Point2D posInicioJugador() {
 		
 		double x = ZONA_JUEGO.getWidth()/2 - Pala.LONGITUD_INICIAL/2;
@@ -251,6 +304,10 @@ public class Juego extends Thread{
 	}
 
 	
+	/**
+	 * Crea y devuelve la posición donde comienza la pelota.
+	 * @return
+	 */
 	private Point2D posInicioPelota() {
 		
 		double x = ZONA_JUEGO.getWidth()/2  - Pelota.RADIO_INICIAL;

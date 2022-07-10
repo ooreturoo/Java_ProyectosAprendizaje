@@ -20,12 +20,15 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		
+		
 		primaryStage.setTitle("PONG");
 		
 		try {
 			primaryStage.setResizable(false);
 			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("/com/miravent/vista/VentanaInicial.fxml"));
 			Scene scene = new Scene(root);
+			
+			// Añade un evento para que se cierre la conexión con la base de datos una vez se cierre la ventana
 			primaryStage.setOnHidden(event -> {
 				
 				if(ConexionBD.getConexion() != null) {
